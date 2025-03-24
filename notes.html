@@ -107,12 +107,12 @@
     }
 
     /* Notes List */
-    #notesList {
+    #notesList, #questionPapersList, #studyMaterialsList {
       list-style: none;
       padding: 0;
     }
 
-    #notesList li {
+    #notesList li, #questionPapersList li, #studyMaterialsList li {
       margin-bottom: 15px;
       background-color: #1e1e1e;
       padding: 15px;
@@ -121,7 +121,7 @@
       transition: transform 0.3s, background-color 0.3s;
     }
 
-    #notesList li a {
+    #notesList li a, #questionPapersList li a, #studyMaterialsList li a {
       text-decoration: none;
       color: #ccc;
       display: flex;
@@ -129,12 +129,12 @@
       font-size: 1.1rem;
     }
 
-    #notesList li:hover {
+    #notesList li:hover, #questionPapersList li:hover, #studyMaterialsList li:hover {
       background-color: #00f0ff;
       transform: translateY(-5px);
     }
 
-    #notesList li a:hover {
+    #notesList li a:hover, #questionPapersList li a:hover, #studyMaterialsList li a:hover {
       color: #0a0a0a;
     }
 
@@ -188,13 +188,13 @@
   <nav>
     <ul>
       <li><a href="index.html" class="nav-link neon-hover">Home</a></li>
-            <li><a href="notes.html" class="nav-link neon-hover">Class Notes</a></li>
-            <li><a href="timetable.html" class="nav-link neon-hover">Timetable</a></li>
-            <li><a href="events.html" class="nav-link neon-hover">Events</a></li>
-            <li><a href="faculty.html" class="nav-link neon-hover">Faculty</a></li>
-            <li><a href="about.html" class="nav-link neon-hover">About Us</a></li>
-            <li><a href="wa group.html" class="nav-link neon-hover">WA Groups</a></li>
-            <li><a href="contact.html" class="nav-link neon-hover">Contact Us</a></li>
+      <li><a href="notes.html" class="nav-link neon-hover">Class Notes</a></li>
+      <li><a href="timetable.html" class="nav-link neon-hover">Timetable</a></li>
+      <li><a href="events.html" class="nav-link neon-hover">Events</a></li>
+      <li><a href="faculty.html" class="nav-link neon-hover">Faculty</a></li>
+      <li><a href="about.html" class="nav-link neon-hover">About Us</a></li>
+      <li><a href="wa_group.html" class="nav-link neon-hover">WA Groups</a></li>
+      <li><a href="contact.html" class="nav-link neon-hover">Contact Us</a></li>
     </ul>
     <div class="hamburger">
       <div></div>
@@ -211,26 +211,44 @@
   <!-- Search Bar -->
   <div class="search-bar">
     <input type="text" id="searchNotes" onkeyup="searchNotes()" placeholder="Search notes..." />
-  </div>
+  </div> <hr>
+
+  <h2>
+  <p>📢 Now Available: Class Notes!  <br>
+    📚 Some notes, lab manuals, question papers, and additional materials are not uploaded yet, but they will be available soon.  <br>
+    ✨ Stay tuned for updates! 🚀 </p> <br> <hr>
 
   <!-- Notes List -->
+  <h2>Class Notes</h2>
   <ul id="notesList">
     <li><a href="https://drive.google.com/file/d/1bFNm9noSmT2YqKpZIkcQ67iXRhTM9Mdl/view?usp=sharing" download><span class="icon">📄</span> Analysis and Design of Algorithms Notes</a></li>
     <li><a href="https://docs.google.com/document/d/1hwi8Zib1XuyWivL6Y_Qpd5c7-AdSjZsS/edit?usp=sharing&ouid=100286190042715950257&rtpof=true&sd=true" download><span class="icon">📄</span> Analysis and Design of Algorithms Lab Manual</a></li>
     <li><a href="https://drive.google.com/file/d/1zUydZGIP15ySH-PjzmfSVrlTMONryZ5e/view?usp=sharing" download><span class="icon">📄</span> Operating Systems Notes</a></li>
-    <li><a href="https://drive.google.com/file/d/1HqVzuPNHRRIi99mOSL1NTGjso5xdiGGP/view?usp=sharing" download><span class="icon">📄</span> Operating Systems Lab Manual </a></li>
-    <li><a href="https://drive.google.com/drive/folders/1NQsB3lfkRImVYF3K2OONd0M4x3DFIQaY?usp=sharing" download><span class="icon">📄</span> Software Engineering  Notes</a></li>
-    <li><a href="https://drive.google.com/drive/folders/1NQsB3lfkRImVYF3K2OONd0M4x3DFIQaY?usp=sharing" download><span class="icon">📄</span> Software Engineering Lab </a></li>
+    <li><a href="https://drive.google.com/file/d/1HqVzuPNHRRIi99mOSL1NTGjso5xdiGGP/view?usp=sharing" download><span class="icon">📄</span> Operating Systems Lab Manual</a></li>
+    <li><a href="https://drive.google.com/drive/folders/1NQsB3lfkRImVYF3K2OONd0M4x3DFIQaY?usp=sharing" download><span class="icon">📄</span> Software Engineering Notes</a></li>
+    <li><a href="https://drive.google.com/drive/folders/1NQsB3lfkRImVYF3K2OONd0M4x3DFIQaY?usp=sharing" download><span class="icon">📄</span> Software Engineering Lab</a></li>
+  </ul>
+
+  <!-- Question Papers Section -->
+  <h2>Question Papers</h2>
+  <ul id="questionPapersList">
+    <li><a href="https://drive.google.com/file/d/1QWERTY123456/view?usp=sharing" download><span class="icon">📝</span> Analysis and Design of Algorithms - Previous Year Paper</a></li>
+    <li><a href="https://drive.google.com/file/d/1QWERTY123456/view?usp=sharing" download><span class="icon">📝</span> Operating Systems - Previous Year Paper</a></li>
+    <li><a href="https://drive.google.com/file/d/1QWERTY123456/view?usp=sharing" download><span class="icon">📝</span> Software Engineering - Previous Year Paper</a></li>
+  </ul>
+
+  <!-- Study Materials Section -->
+  <h2>Additional Study Materials</h2>
+  <ul id="studyMaterialsList">
+    <li><a href="https://drive.google.com/file/d/1QWERTY123456/view?usp=sharing" download><span class="icon">📚</span> Data Structures Reference Guide</a></li>
+    <li><a href="https://drive.google.com/file/d/1QWERTY123456/view?usp=sharing" download><span class="icon">📚</span> Software Engineering Project Guidelines</a></li>
   </ul>
 </section>
-
-
 
 <!-- Footer -->
 <footer>
   <div class="footer-content">
     <p>&copy; 2025 All rights reserved. <a href="index.html">CSBS Dept Hub</a>. Developed by <a href="https://praveenhallur123.github.io/PraveenHallur123-Praveen---personal-portfolio/">Praveen Hallur</a> | Company: <a href="https://miniprojectbytes.blogspot.com/">Mini Project Bytes</a></p>
-  </footer></p>
   </div>
 </footer>
 
@@ -247,7 +265,7 @@
   // Search Notes Function
   function searchNotes() {
     const input = document.getElementById('searchNotes').value.toLowerCase();
-    const notes = document.querySelectorAll('#notesList li');
+    const notes = document.querySelectorAll('#notesList li, #questionPapersList li, #studyMaterialsList li');
 
     notes.forEach(note => {
       const text = note.textContent.toLowerCase();
