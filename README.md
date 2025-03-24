@@ -12,7 +12,7 @@ Welcome to **CSBS Updates Hub** – your one-stop platform for all class-related
 - 📢 **Announcements** – Stay updated with the latest news and events.  
 
 ## 🚀 How to Access
-👉 Visit the live site: [CSBS Updates Hub](https://csbsdepthub.netlify.app)  
+👉 Visit the live site: [CSBS Updates Hub] https://csbsdepthub.netlify.app 
 
 ## 🛠️ Technologies Used
 - **HTML**  
@@ -39,7 +39,7 @@ This project is licensed under the **MIT License**.
 ---
 
 ⭐ Star this repository if you find it helpful!  
-👨‍💻 Developed by **[Praveen Hallur](https://github.com/PraveenHallur123)**  
+👨‍💻 Developed by **[Praveen Hallur] https://github.com/PraveenHallur123 
 ```
 
 You can modify the repository URL and details as needed! 😎
