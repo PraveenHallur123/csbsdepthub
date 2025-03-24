@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CSBS Events</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar">
+  <div class="container">
+    <a href="#" class="logo">CSBS Dept Hub</a>
+    <div class="nav-links">
+            <li><a href="index.html" class="nav-link neon-hover">Home</a></li>
+            <li><a href="notes.html" class="nav-link neon-hover">Class Notes</a></li>
+            <li><a href="timetable.html" class="nav-link neon-hover">Timetable</a></li>
+            <li><a href="events.html" class="nav-link neon-hover">Events</a></li>
+            <li><a href="faculty.html" class="nav-link neon-hover">Faculty</a></li>
+            <li><a href="wa group.html" class="nav-link neon-hover">WA Groups</a></li>
+            <li><a href="about.html" class="nav-link neon-hover">About Us</a></li>
+            <li><a href="contact.html" class="nav-link neon-hover">Contact Us</a></li>
+    </div>
+    <div class="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- Events Section -->
+<section class="events-section">
+  <div class="container">
+    <h2 class="section-title">🎯 Upcoming Events</h2>
+    
+    <div class="event-card">
+      <h3>🚀 COLOSSUS 2.0 – National Level 24-Hour Hackathon</h3>
+      <p>Get ready to push your limits, collaborate, and innovate at COLOSSUS 2.0, a 24-hour national-level hackathon organized by Dr. Ambedkar Institute of Technology.</p>
+      <p><strong>Date:</strong> April 11th & 12th, 2025
+      </p>
+      <a href="https://pages.razorpay.com/colossus2025" class="event-btn">Register Now</a>
+    </div>
+
+    <div class="event-card">
+      <h3>Create Engaging Reel </h3>
+      <p> Create Engaging Reel!🎬✨  <br>
+
+        The 10X Club is looking for energetic and creative volunteers to help us create engaging reels, promote activities, and brainstorm viral content! If you love being in front of or behind the camera, this is your chance to boost your portfolio, gain hands-on marketing experience, and have fun while making a difference!.</p>
+      <p><strong>Date:</strong> 1st April 2025</p>
+      <a href="https://forms.gle/96rbeh7mxMWQaAPPA" class="event-btn">Join Seminar</a>
+    </div>
+
+    <div class="event-card">
+      <h3>Solution Challenge</h3>
+      <p>register for the Solution Challenge ( Extended deadline ) 🕒! Make sure to form a team of at least 2 members 👫 and also start working on your PPT abstract , which can be found on the website according your solution .
+        .</p>
+      <p><strong>Date:</strong> 5th April 2025</p>
+      <a href="https://vision.hack2skill.com/event/solutionschallenge2025?utm_source=hack2skill&utm_medium=homepage" class="event-btn">Register Now</a>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <p>&copy; 2025 All rights reserved. <a href="index.html">CSBS Dept Hub</a>. Developed by <a href="https://praveenhallur123.github.io/PraveenHallur123-Praveen---personal-portfolio/">Praveen Hallur</a> | Company: <a href="https://miniprojectbytes.blogspot.com/">Mini Project Bytes</a></p>
+  </footer></p>
+    
+</footer>
+
+<!-- FontAwesome for Icons -->
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+<!-- JS for Mobile Navbar Toggle -->
+<script>
+  const hamburger = document.querySelector(".hamburger");
+  const navLinks = document.querySelector(".nav-links");
+
+  hamburger.addEventListener("click", () => {
+    navLinks.classList.toggle("active");
+  });
+</script>
+
+<!-- CSS -->
+<style>
+  /* General Styling */
+  body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #0d1117;
+    color: #c9d1d9;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* Navbar Styling */
+  .navbar {
+    background-color: #161b22;
+    padding: 20px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  }
+
+  .navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .logo {
+    font-size: 24px;
+    color: #58a6ff;
+    font-weight: bold;
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 20px;
+  }
+
+  .nav-links a {
+    color: #c9d1d9;
+    text-decoration: none;
+    font-size: 16px;
+    transition: color 0.3s ease;
+  }
+
+  .nav-links a:hover, .nav-links .active {
+    color: #58a6ff;
+  }
+
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+  }
+
+  .hamburger span {
+    width: 25px;
+    height: 3px;
+    background-color: #c9d1d9;
+    transition: all 0.3s ease;
+  }
+
+  /* Events Section */
+  .events-section {
+    padding: 100px 20px;
+    margin-top: 80px;
+  }
+
+  .section-title {
+    font-size: 32px;
+    color: #58a6ff;
+    margin-bottom: 30px;
+    text-align: center;
+  }
+
+  .event-card {
+    background-color: #161b22;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease;
+  }
+
+  .event-card:hover {
+    transform: translateY(-5px);
+  }
+
+  .event-card h3 {
+    color: #58a6ff;
+    margin-bottom: 10px;
+  }
+
+  .event-card p {
+    color: #8b949e;
+    margin-bottom: 10px;
+  }
+
+  .event-btn {
+    background-color: #58a6ff;
+    color: #0d1117;
+    padding: 10px 20px;
+    border-radius: 25px;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 10px;
+    transition: background 0.3s ease;
+  }
+
+  .event-btn:hover {
+    background-color: #2ea043;
+  }
+
+  /* Footer Styling */
+  .footer {
+    background-color: #161b22;
+    padding: 20px;
+    text-align: center;
+    color: #8b949e;
+    margin-top: 40px;
+  }
+
+  .footer .social-links {
+    margin-top: 10px;
+  }
+
+  .footer .social-links a {
+    color: #58a6ff;
+    margin: 0 10px;
+    font-size: 18px;
+    transition: color 0.3s ease;
+  }
+
+  .footer .social-links a:hover {
+    color: #2ea043;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .nav-links {
+      display: none;
+      flex-direction: column;
+      background-color: #161b22;
+      position: absolute;
+      top: 60px;
+      right: 0;
+      width: 100%;
+      padding: 20px;
+    }
+
+    .nav-links a {
+      padding: 10px;
+      text-align: center;
+      display: block;
+      font-size: 18px;
+    }
+
+    .nav-links.active {
+      display: flex;
+    }
+
+    .hamburger {
+      display: flex;
+    }
+  }
+</style>
+
+</body>
+</html>

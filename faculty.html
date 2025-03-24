@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>Faculty & HOD - CSBS Department</title>
+  <style>
+    :root {
+      --neon-blue: #00f3ff;
+      --neon-pink: #ff00ff;
+      --cyber-purple: #6c00ff;
+      --dark-bg: #0a0a1a;
+      --glass-bg: rgba(16, 16, 32, 0.95);
+      --text-light: #f0f4ff;
+      --cyber-border: 1px solid rgba(0, 243, 255, 0.3);
+      --cyber-shadow: 0 0 25px rgba(0, 243, 255, 0.4);
+      --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    /* Base Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--dark-bg);
+      color: var(--text-light);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    
+
+    /* Enhanced Navbar */
+    .navbar {
+      background: var(--glass-bg);
+      backdrop-filter: blur(15px);
+      padding: 1rem 2rem;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      border-bottom: var(--cyber-border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      background: linear-gradient(45deg, var(--neon-blue), var(--cyber-purple));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 0 15px var(--neon-blue);
+      animation: text-glitch 2s infinite;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-light);
+      text-decoration: none;
+      position: relative;
+      padding: 0.5rem 0;
+      transition: var(--transition);
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background: var(--neon-blue);
+      transition: var(--transition);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    /* Holographic Header */
+    .header {
+      padding: 120px 2rem 80px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(45deg,
+        var(--cyber-purple),
+        var(--neon-blue)
+      );
+      opacity: 0.1;
+      z-index: -1;
+    }
+
+    .header h1 {
+      font-size: clamp (2rem, 5vw, 3.5rem);
+      margin-bottom: 1rem;
+      text-shadow: 0 0 30px var(--neon-blue);
+    }
+
+    /* HOD Section */
+    .container {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    .hod-section {
+      background: var(--glass-bg);
+      backdrop-filter: blur(10px);
+      padding: 2rem;
+      border-radius: 20px;
+      border: var(--cyber-border);
+      display: flex;
+      gap: 2rem;
+      margin-bottom: 3rem;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hod-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        45deg,
+        transparent 0%,
+        rgba(0, 243, 255, 0.1) 50%,
+        transparent 100%
+      );
+      animation: hologram-flow 8s linear infinite;
+    }
+
+    @keyframes hologram-flow {
+      0% { transform: translate(-50%, -50%); }
+      100% { transform: translate(50%, 50%); }
+    }
+
+    .hod-section img {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--neon-blue);
+      box-shadow: var(--cyber-shadow);
+      flex-shrink: 0;
+    }
+
+    /* Faculty Grid */
+    .faculty-section {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .faculty-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(10px);
+      padding: 1.5rem;
+      border-radius: 15px;
+      border: var(--cyber-border);
+      transition: var(--transition);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .faculty-card:hover {
+      transform: translateY(-10px);
+      box-shadow: var(--cyber-shadow);
+    }
+
+    .faculty-card img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 1rem;
+      border: 2px solid var(--neon-blue);
+      box-shadow: 0 0 15px var(--neon-blue);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .nav-links {
+        position: fixed;
+        top: 70px;
+        right: -100%;
+        flex-direction: column;
+        background: var(--glass-bg);
+        backdrop-filter: blur(15px);
+        width: 70%;
+        height: calc(100vh - 70px);
+        padding: 2rem;
+        transition: var(--transition);
+        border-left: var(--cyber-border);
+        display: flex; /* Ensure it is a flex container */
+        gap: 1rem; /* Add some gap between items */
+      }
+
+      .nav-links.active {
+        right: 0;
+      }
+
+      .hod-section {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      .hamburger {
+        display: block;
+      }
+    }
+
+    /* Mobile Menu */
+    .hamburger {
+      display: none;
+      cursor: pointer;
+      z-index: 1001;
+    }
+
+    .hamburger div {
+      width: 25px;
+      height: 3px;
+      background: var(--neon-blue);
+      margin: 5px;
+      transition: var(--transition);
+    }
+
+    /* Footer */
+    .footer {
+      background: var(--glass-bg);
+      backdrop-filter: blur(15px);
+      padding: 2rem;
+      text-align: center;
+      margin-top: 4rem;
+      border-top: var(--cyber-border);
+    }
+
+    /* Animations */
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+      100% { transform: translateY(0px); }
+    }
+
+    .faculty-card:hover img {
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @media (max-width: 480px) {
+      .faculty-card {
+        padding: 1rem;
+      }
+      
+      .faculty-card img {
+        width: 80px;
+        height: 80px;
+      }
+      
+      .hod-section img {
+        width : 120px;
+        height: 120px;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .navbar {
+        padding: 1rem;
+      }
+      
+      .logo {
+        font-size: 1.5rem;
+      }
+    }
+
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo">CSBS Dept Hub</div>
+    <ul class="nav-links">
+      <li><a href="index.html" class="nav-link neon-hover">Home</a></li>
+      <li><a href="notes.html" class="nav-link neon-hover">Class Notes</a></li>
+      <li><a href="timetable.html" class="nav-link neon-hover">Timetable</a></li>
+      <li><a href="events.html" class="nav-link neon-hover">Events</a></li>
+      <li><a href="faculty.html" class="nav-link neon-hover">Faculty</a></li>
+      <li><a href="wa group.html" class="nav-link neon-hover">WA Groups</a></li>
+      <li><a href="about.html" class="nav-link neon-hover">About Us</a></li>
+      <li><a href="contact.html" class="nav-link neon-hover">Contact Us</a></li>
+    </ul>
+    <div class="hamburger" onclick="toggleMenu()">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </nav>
+
+  <!-- Header -->
+  <div class="header">
+    <h1>Welcome to CSBS Department</h1>
+    <p>Your hub for all class notes, updates, and faculty details.</p>
+  </div>
+
+  <!-- HOD Section -->
+  <div class="container">
+    <h2 id="hod">Head of Department</h2>
+    <div class="hod-section">
+      <img src="HOD.jpg" alt="HOD Photo" />
+      <div>
+        <h3> Dr.Vidyarani H J </h3>
+        <h4>M.Tech, Ph.D</h4>
+        <p>Head of Department</p>
+        <p>Phone: +91 805 028 4845</p>
+        <p>Email: vidyarani.is@drait.edu.in</p>
+      </div>
+    </div>
+
+    <!-- Faculty Section -->
+    <h2 id="faculty">Our Faculty Members</h2>
+    <div class="faculty-section">
+      <div class="faculty-card">
+        <img src="1.jpg" alt="Faculty" />
+        <h3>Prof. Divya S</h3>
+        <h4>M.Tech</h4>
+        <p>Assistant Professor</p>
+        <p>Subjects: ADA & SE LAB</p>
+        <p>Phone: +91 953 802 9671</p>
+        <p>Email: divyas.cs@drait.edu.in</p>
+      </div>
+
+      <div class="faculty-card">
+        <img src="2.jpeg" alt="Faculty" />
+        <h3>Prof. Yashaswi R</h3>
+        <h4>M.Tech</h4>
+        <p>Associate Professor</p>
+        <p>Subject: none</p>
+        <p>Phone: +91 990 262 3412</p>
+        <p>Email: yashaswi.cs@drait.edu.in</p>
+      </div>
+
+      <div class="faculty-card">
+        <img src="3.jpg" alt="Faculty" />
+        <h3>Dr. GIRIJA S</h3>
+        <h4>M.Tech, Ph.D</h4>
+        <p>Professor</p>
+        <p>Subject: Operating System</p>
+        <p>Phone: +91 998 600 7870</p>
+        <p>Email: girija.ec@drait.edu.in</p>
+      </div>
+
+      <div class="faculty-card">
+        <img src="4.png" alt="Faculty" />
+        <h3> Dr. Nagarathnama H </h3>
+        <h4>M.Sc., Ph.D</h4>
+        <p>Assistant Professor</p>
+        <p>Subjects: Business Communication & Value Science</p>
+        <p>Phone:  +91 948 178 1018</p>
+        <p>Email: nagarathnamma.h@dr-ait.org</p>
+      </div>
+
+      <div class="faculty-card">
+        <img src="5.png" alt="Faculty" />
+        <h3>Dr.B.S. Shylaja</h3>
+        <h4>Ph.D</h4>
+        <p> Professor</p>
+        <p>Subjects: AI & ML</p>
+        <p>Phone: +91 953 888 1302</p>
+        <p>Email: shylabs.is@drait.edu.in</p>
+      </div>
+
+      <div class="faculty-card">
+        <img src="2.jpeg" alt="Faculty" />
+        <h3>Prof. Kumaraswamy S</h3>
+        <h4>M.Tech, Ph.D</h4>
+        <p>Professor</p>
+        <p>Subject: Data Structures</p>
+        <p>Phone: +91 998 877 6655</p>
+        <p>Email: neha.cs@drait.edu.in</p>
+      </div>
+
+      <div class="faculty-card">
+        <img src="6.png" alt="Faculty" />
+        <h3>Dr. R. Murali, </h3>
+        <h4>Ph.D.</h4>
+        <p>Professor</p>
+        <p>Role: Training and Placement Officer</p>
+        <p>Phone: +91 984 425 9313</p>
+        <p>Email: placements@drait.edu.in</p>
+      </div>
+
+      <div class="faculty-card">
+        <img src="2.jpeg" alt="Faculty" />
+        <h3>NSS Co-ordinator</h3>
+        <h4>M.Tech</h4>
+        <p>Associate Professor</p>
+        <p>Subjects: NSS Co-ordinator </p>
+        <p>Phone: +91 *** *** ****</p>
+        <p>Email: nss@drait.edu.in</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer" id="contact">
+    &copy; 2025 All rights reserved. <a href="index.html">CSBS Dept Hub</a>. Developed by <a href="https://praveenhallur123.github.io/PraveenHallur123-Praveen---personal-portfolio/">Praveen Hallur</a> | Company: <a href="https://miniprojectbytes.blogspot.com/">Mini Project Bytes</a>
+  </div>
+
+  <script>
+    function toggleMenu() {
+      const navLinks = document.querySelector('.nav-links');
+      const hamburger = document.querySelector('.hamburger');
+      navLinks.classList.toggle('active');
+      hamburger.classList.toggle('active');
+    }
+
+    // Add smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
+  </script>
+</body>
+</html>

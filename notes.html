@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>New Notes Portal</title>
+  <style>
+    /* General Styling */
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #0a0a0a;
+      color: #f1f1f1;
+    }
+
+    /* Header */
+    header {
+      background: linear-gradient(90deg, #1e1e1e, #0f0f0f);
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #00f0ff;
+      text-transform: uppercase;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+      padding: 0;
+      margin: 0;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: #ccc;
+      font-size: 1rem;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    nav ul li a:hover,
+    nav ul li a.active {
+      color: #00f0ff;
+    }
+
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      cursor: pointer;
+    }
+
+    .hamburger div {
+      width: 25px;
+      height: 3px;
+      background-color: #ccc;
+      margin: 4px;
+      transition: 0.3s;
+    }
+
+    /* Notes Section */
+    .notes-section {
+      padding: 60px 10%;
+      background-color: #111;
+    }
+
+    .notes-section h2 {
+      font-size: 2.5rem;
+      color: #00f0ff;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    /* Search Bar */
+    .search-bar {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 30px;
+    }
+
+    #searchNotes {
+      width: 100%;
+      max-width: 500px;
+      padding: 12px;
+      border: 1px solid #333;
+      background-color: #1a1a1a;
+      color: #ccc;
+      border-radius: 20px;
+      font-size: 1rem;
+      outline: none;
+      transition: border-color 0.3s;
+    }
+
+    #searchNotes:focus {
+      border-color: #00f0ff;
+    }
+
+    /* Notes List */
+    #notesList {
+      list-style: none;
+      padding: 0;
+    }
+
+    #notesList li {
+      margin-bottom: 15px;
+      background-color: #1e1e1e;
+      padding: 15px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 255, 255, 0.1);
+      transition: transform 0.3s, background-color 0.3s;
+    }
+
+    #notesList li a {
+      text-decoration: none;
+      color: #ccc;
+      display: flex;
+      align-items: center;
+      font-size: 1.1rem;
+    }
+
+    #notesList li:hover {
+      background-color: #00f0ff;
+      transform: translateY(-5px);
+    }
+
+    #notesList li a:hover {
+      color: #0a0a0a;
+    }
+
+    .icon {
+      margin-right: 10px;
+      font-size: 1.5rem;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #0e0e0e;
+      padding: 15px 0;
+      text-align: center;
+      color: #888;
+    }
+
+    .footer-content p {
+      margin: 0;
+      font-size: 0.9rem;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      nav ul {
+        display: none;
+        flex-direction: column;
+        background-color: #111;
+        padding: 20px;
+        position: absolute;
+        right: 0;
+        top: 60px;
+        width: 50%;
+        z-index: 999;
+      }
+
+      nav ul.show {
+        display: flex;
+      }
+
+      .hamburger {
+        display: block;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Header -->
+<header>
+  <div class="logo">📘 CSBS Dept Hub</div>
+  <nav>
+    <ul>
+      <li><a href="index.html" class="nav-link neon-hover">Home</a></li>
+            <li><a href="notes.html" class="nav-link neon-hover">Class Notes</a></li>
+            <li><a href="timetable.html" class="nav-link neon-hover">Timetable</a></li>
+            <li><a href="events.html" class="nav-link neon-hover">Events</a></li>
+            <li><a href="faculty.html" class="nav-link neon-hover">Faculty</a></li>
+            <li><a href="about.html" class="nav-link neon-hover">About Us</a></li>
+            <li><a href="wa group.html" class="nav-link neon-hover">WA Groups</a></li>
+            <li><a href="contact.html" class="nav-link neon-hover">Contact Us</a></li>
+    </ul>
+    <div class="hamburger">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </nav>
+</header>
+
+<!-- Notes Section -->
+<section class="notes-section">
+  <h2>📚 Study Notes</h2>
+
+  <!-- Search Bar -->
+  <div class="search-bar">
+    <input type="text" id="searchNotes" onkeyup="searchNotes()" placeholder="Search notes..." />
+  </div>
+
+  <!-- Notes List -->
+  <ul id="notesList">
+    <li><a href="https://drive.google.com/file/d/1bFNm9noSmT2YqKpZIkcQ67iXRhTM9Mdl/view?usp=sharing" download><span class="icon">📄</span> Analysis and Design of Algorithms Notes</a></li>
+    <li><a href="https://docs.google.com/document/d/1hwi8Zib1XuyWivL6Y_Qpd5c7-AdSjZsS/edit?usp=sharing&ouid=100286190042715950257&rtpof=true&sd=true" download><span class="icon">📄</span> Analysis and Design of Algorithms Lab Manual</a></li>
+    <li><a href="https://drive.google.com/file/d/1zUydZGIP15ySH-PjzmfSVrlTMONryZ5e/view?usp=sharing" download><span class="icon">📄</span> Operating Systems Notes</a></li>
+    <li><a href="https://drive.google.com/file/d/1HqVzuPNHRRIi99mOSL1NTGjso5xdiGGP/view?usp=sharing" download><span class="icon">📄</span> Operating Systems Lab Manual </a></li>
+    <li><a href="https://drive.google.com/drive/folders/1NQsB3lfkRImVYF3K2OONd0M4x3DFIQaY?usp=sharing" download><span class="icon">📄</span> Software Engineering  Notes</a></li>
+    <li><a href="https://drive.google.com/drive/folders/1NQsB3lfkRImVYF3K2OONd0M4x3DFIQaY?usp=sharing" download><span class="icon">📄</span> Software Engineering Lab </a></li>
+  </ul>
+</section>
+
+
+
+<!-- Footer -->
+<footer>
+  <div class="footer-content">
+    <p>&copy; 2025 All rights reserved. <a href="index.html">CSBS Dept Hub</a>. Developed by <a href="https://praveenhallur123.github.io/PraveenHallur123-Praveen---personal-portfolio/">Praveen Hallur</a> | Company: <a href="https://miniprojectbytes.blogspot.com/">Mini Project Bytes</a></p>
+  </footer></p>
+  </div>
+</footer>
+
+<!-- JavaScript -->
+<script>
+  // Hamburger Menu for Mobile View
+  const hamburger = document.querySelector(".hamburger");
+  const nav = document.querySelector("nav ul");
+
+  hamburger.addEventListener("click", () => {
+    nav.classList.toggle("show");
+  });
+
+  // Search Notes Function
+  function searchNotes() {
+    const input = document.getElementById('searchNotes').value.toLowerCase();
+    const notes = document.querySelectorAll('#notesList li');
+
+    notes.forEach(note => {
+      const text = note.textContent.toLowerCase();
+      note.style.display = text.includes(input) ? '' : 'none';
+    });
+  }
+</script>
+
+</body>
+</html>

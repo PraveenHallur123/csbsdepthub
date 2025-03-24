@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact CSBS Department</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Base Styles */
+        :root {
+            --primary: #00f3ff;
+            --secondary: #2a2a72;
+            --dark: #0a0a1a;
+            --light: #f0f4ff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        body {
+            background: var(--dark);
+            color: var(--light);
+            line-height: 1.6;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(10, 10, 26, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(0, 243, 255, 0.1);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, #00f3ff, #2a2a72);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        /* Main Content */
+        main {
+            margin-top: 80px;
+            padding: 2rem 5%;
+            min-height: calc(100vh - 200px);
+        }
+
+        /* Contact Section */
+        .contact-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            align-items: start;
+        }
+
+        .contact-info {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 243, 255, 0.1);
+        }
+
+        .contact-form {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 243, 255, 0.1);
+        }
+
+        h2 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+        }
+
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 0.8rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(0, 243, 255, 0.2);
+            border-radius: 8px;
+            color: var(--light);
+            transition: all 0.3s ease;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.2);
+        }
+
+        button {
+            background: var(--primary);
+            color: var(--dark);
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 243, 255, 0.3);
+        }
+
+        /* Developer Info */
+        .developer-section {
+            text-align: center;
+            margin-top: 2rem;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            color: var(--light);
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--primary);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header {
+                padding: 1rem;
+            }
+
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            main {
+                margin-top: 60px;
+                padding: 1rem;
+            }
+
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">CSBS Dept Hub</div>
+        <nav>
+            <a href="index.html" style="color: var(--light); text-decoration: none;">Home</a> </li>
+            <a href="wa group.html" style="color: var(--light); text-decoration: none;">WA Groups</a> </li>
+            
+        </nav>
+    </header>
+
+    <main>
+        <div class="contact-container">
+            <div class="contact-info">
+                <h2>📌 Contact Information</h2>
+                <p><strong>Address:</strong><br>
+                Dr. Ambedkar Institute of Technology<br>
+                Near Jnana Bharathi Campus,<br>
+                Bengaluru, Karnataka 560056</p>
+                
+                <p><strong>Email:</strong> praveenhallur2003@gmail.com</p>
+                <p><strong>Phone:</strong> +91 9632912346</p>
+            </div>
+
+            <div class="contact-form">
+                <h2>📩 Send us a Message</h2>
+                <form id="contactForm">
+                    <div class="form-group">
+                        <input type="text" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea placeholder="Your Message" rows="5" required></textarea>
+                    </div>
+                    <button type="submit">Send Message 🚀</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="developer-section">
+            &copy; 2025 All rights reserved. <a href="index.html">CSBS Dept Hub</a>. Developed by <a href="https://praveenhallur123.github.io/PraveenHallur123-Praveen---personal-portfolio/">Praveen Hallur</a> | Company: <a href="https://miniprojectbytes.blogspot.com/">Mini Project Bytes</a></p>
+            <div class="social-links">
+                <a href="https://github.com/PraveenHallur123"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/%E0%B2%AA%E0%B3%8D%E0%B2%B0%E0%B2%B5%E0%B3%80%E0%B2%A3-%E0%B2%B9%E0%B2%B3%E0%B3%8D%E0%B2%B3%E0%B3%82%E0%B2%B0-9463ba1bb/"><i class="fab fa-linkedin"></i></a>
+                <a href="https://x.com/praveenhallur72?t=x1GfFuSg3qwA6TLlnhVJeQ&s=09"><i class="fab fa-twitter"></i></a>
+                <a href="https://www.instagram.com/mr.praveen_hallur/"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.facebook.com/praveen.hallur.143?rdid=76ey4WTLWzA9d0nm&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F19sapEapBu%2F"><i class="fab fa-facebook"></i></a>
+            </div>
+        </div>
+    </main>
+
+    <script>
+      document.getElementById('contactForm').addEventListener('submit', function(e) {
+          e.preventDefault();
+  
+          // Get form values
+          const name = this.querySelector('input[type="text"]').value;
+          const email = this.querySelector('input[type="email"]').value;
+          const message = this.querySelector('textarea').value;
+  
+          // Create a mailto link
+          const subject = encodeURIComponent(`Message from ${name}`);
+          const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
+          const mailtoLink = `mailto:praveenhallur20003@gmail.com?subject=${subject}&body=${body}`;
+  
+          // Open default email client
+          window.location.href = mailtoLink;
+      });
+  </script>
+  
+</body>
+</html>

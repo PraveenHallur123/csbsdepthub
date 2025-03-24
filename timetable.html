@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <title>CSBS Timetable - 4th Semester</title>
+  <style>
+    :root {
+      --neon-blue: #00f3ff;
+      --neon-pink: #ff00ff;
+      --cyber-purple: #6c00ff;
+      --dark-bg: #0a0a1a;
+      --glass-bg: rgba(16, 16, 32, 0.95);
+      --text-light: #f0f4ff;
+      --cyber-border: 1px solid rgba(0, 243, 255, 0.3);
+      --cyber-shadow: 0 0 25px rgba(0, 243, 255, 0.4);
+      --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    /* Base Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: 'Orbitron', sans-serif;
+      background: var(--dark-bg);
+      color: var(--text-light);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    
+    
+
+    /* Enhanced Navbar */
+    .navbar {
+      background: var(--glass-bg);
+      backdrop-filter: blur(15px);
+      padding: 1rem 2rem;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      border-bottom: var(--cyber-border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.6rem;
+      background: linear-gradient(45deg, var(--neon-blue), var(--cyber-purple));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 0 15px var(--neon-blue);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-light);
+      text-decoration: none;
+      position: relative;
+      padding: 0.5rem 0;
+      transition: var(--transition);
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background: var(--neon-blue);
+      transition: var(--transition);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    /* Main Container */
+    .container {
+      max-width: 1200px;
+      margin: 100px auto 50px;
+      padding: 2rem;
+      background: var(--glass-bg);
+      backdrop-filter: blur(15px);
+      border-radius: 15px;
+      border: var(--cyber-border);
+      box-shadow: var(--cyber-shadow);
+    }
+
+    /* Cyberpunk Heading */
+    h2 {
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      text-align: center;
+      margin-bottom: 2rem;
+      background: linear-gradient(45deg, var(--neon-blue), var(--neon-pink));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 0 30px var(--neon-blue);
+      animation: text-glitch 2s infinite;
+    }
+
+    /* Holographic Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 2rem 0;
+      background: var(--glass-bg);
+      backdrop-filter: blur(10px);
+      border-radius: 12px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    table::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(45deg,
+        transparent 0%,
+        rgba(0, 243, 255, 0.1) 50%,
+        transparent 100%
+      );
+      animation: hologram-flow 8s linear infinite;
+    }
+
+    @keyframes hologram-flow {
+      0% { transform: translate(-50%, -50%); }
+      100% { transform: translate(50%, 50%); }
+    }
+
+    th, td {
+      padding: 1rem;
+      text-align: center;
+      border: 1px solid rgba(0, 243, 255, 0.1);
+      position: relative;
+      z-index: 1;
+    }
+
+    th {
+      background: linear-gradient(45deg, #2a2a72, #009ffd);
+      color: var(--text-light);
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    tr:nth-child(even) {
+      background: rgba(0, 159, 253, 0.05);
+    }
+
+    .break {
+      background: rgba(255, 77, 77, 0.2);
+      color: #ff4d4d;
+      font-weight: bold;
+    }
+
+    /* Responsive Tables */
+    @media (max-width: 768px) {
+      .container {
+        margin: 80px 15px 30px;
+        padding: 1rem;
+      }
+
+      table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      th, td {
+        min-width: 120px;
+        padding: 0.8rem;
+      }
+    }
+
+    /* Mobile Menu */
+    .hamburger {
+      display: none;
+      cursor: pointer;
+      z-index: 1001;
+    }
+
+    .hamburger div {
+      width: 25px;
+      height: 3px;
+      background: var(--neon-blue);
+      margin: 5px;
+      transition: var(--transition);
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        position: fixed;
+        top: 70px;
+        right: -100%;
+        flex-direction: column;
+        background: var(--glass-bg);
+        backdrop-filter: blur(15px);
+        width: 70%;
+        height: calc(100vh - 70px);
+        padding: 2rem;
+        transition: var(--transition);
+        border-left: var(--cyber-border);
+      }
+
+      .nav-links.active {
+        right: 0;
+      }
+
+      .hamburger {
+        display: block;
+      }
+
+      .hamburger.active div:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+      }
+      .hamburger.active div:nth-child(2) {
+        opacity: 0;
+      }
+      .hamburger.active div:nth-child(3) {
+        transform: rotate(-45deg) translate(5px, -5px);
+      }
+    }
+
+    /* Timetable Image */
+    .timetable-image {
+      width: 100%;
+      max-width: 800px;
+      margin: 2rem auto;
+      display: block;
+      border-radius: 12px;
+      border: var(--cyber-border);
+      box-shadow: var(--cyber-shadow);
+      transition: transform 0.3s ease;
+    }
+
+    .timetable-image:hover {
+      transform: scale(1.02);
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo">👨💻 CSBS Dept Hub</div>
+    <ul class="nav-links">
+      <li><a href="index.html" class="nav-link neon-hover">Home</a></li>
+            <li><a href="notes.html" class="nav-link neon-hover">Class Notes</a></li>
+            <li><a href="timetable.html" class="nav-link neon-hover">Timetable</a></li>
+            <li><a href="events.html" class="nav-link neon-hover">Events</a></li>
+            <li><a href="faculty.html" class="nav-link neon-hover">Faculty</a></li>
+            <li><a href="wa group.html" class="nav-link neon-hover">WA Groups</a></li>
+            <li><a href="about.html" class="nav-link neon-hover">About Us</a></li>
+            <li><a href="contact.html" class="nav-link neon-hover">Contact Us</a></li>
+    </ul>
+    <div class="hamburger" onclick="toggleMenu()">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </nav>
+
+  <!-- Rest of your HTML content remains the same -->
+
+  <div class="container">
+    <h2>📅 CSBS Timetable - 4th Semester</h2>
+  
+    
+  
+    <!-- Timetable Table -->
+    <table>
+      <tr>
+        <th>Time</th>
+        <th>Monday</th>
+        <th>Tuesday</th>
+        <th>Wednesday</th>
+        <th>Thursday</th>
+        <th>Friday</th>
+        <th>Saturday</th>
+      </tr>
+      <tr>
+        <td>9:00 am – 9:55 am</td>
+        <td class="highlight">OS</td>
+        <td>ADA</td>
+        <td>ADA/SE/OS Lab</td>
+        <td>MR&MM</td>
+        <td>BV</td>
+        <td>-</td>
+      </tr>
+      <tr>
+        <td>9:55 am – 10:50 am</td>
+        <td>ADA</td>
+        <td>UHV</td>
+        <td>-</td>
+        <td>ADA</td>
+        <td>MR&MM</td>
+        <td>-</td>
+      </tr>
+      <tr>
+        <td colspan="7" class="break">TEA BREAK</td>
+      </tr>
+      <tr>
+        <td>11:10 am – 12:05 pm</td>
+        <td>ADA/SE/OS Lab</td>
+        <td>Biology</td>
+        <td>-</td>
+        <td>OS</td>
+        <td>OS</td>
+        <td>-</td>
+      </tr>
+      <tr>
+        <td>12:05 pm – 1:00 pm</td>
+        <td>Biology</td>
+        <td>FM</td>
+        <td>-</td>
+        <td>OS</td>
+        <td>Biology</td>
+        <td>-</td>
+      </tr>
+      <tr>
+        <td>1:45 pm – 2:40 pm</td>
+        <td>MR&MM</td>
+        <td>FM</td>
+        <td>-</td>
+        <td>-</td>
+        <td>-</td>
+        <td>-</td>
+      </tr>
+      <tr>
+        <td>2:40 pm – 3:35 pm</td>
+        <td>FM</td>
+        <td>-</td>
+        <td>-</td>
+        <td>-</td>
+        <td>-</td>
+        <td>-</td>
+      </tr>
+    </table>
+  
+    <!-- Course Details -->
+    <h3>📚 Course Details</h3>
+    <table id="course-details">
+      <tr>
+        <th>Code</th>
+        <th>Title</th>
+        <th>Category</th>
+        <th>Credits</th>
+        <th>Faculty</th>
+      </tr>
+  
+      <tr>
+        <td>22CBT401</td>
+        <td>Fundamentals of Management	</td>
+        <td>PCC</td>
+        <td>3</td>
+        <td>Dr Vidyarani H J</td>
+      </tr>
+      <tr>
+        <td>22CBU402</td>
+        <td>Operating System</td>
+        <td>IPCC</td>
+        <td>4</td>
+        <td>Dr Girija</td>
+      </tr>
+  
+      <tr>
+        <td>22CBU403</td>
+        <td>Analysis and Design of Algorithms</td>
+        <td>IPCC</td>
+        <td>4</td>
+        <td>Prof. Divya S</td>
+      </tr>
+  
+      <tr>
+          <td>22CBU404</td>
+          <td>Software Engineering Lab</td>
+          <td>PCCL</td>
+          <td>1</td>
+          <td>Prof. Divya S</td>
+        </tr>
+  
+        <tr>
+          <td>22CBU405B</td>
+          <td>Marketing Research & Management</td>
+          <td>ESC</td>
+          <td>3</td>
+          <td>Prof. Yashaswi R</td>
+        </tr>
+  
+       
+  
+        <tr>
+          <td>22CBU406X</td>
+          <td>Business Communication & Value Science</td>
+          <td>AEC</td>
+          <td>1</td>
+          <td>Prof. Nagarathnamma</td>
+        </tr>
+  
+        <tr>
+          <td>22BIT407</td>
+          <td>Biology for Engineers</td>
+          <td>BSC</td>
+          <td>2</td>
+          <td>Dr Shylaja B S</td>
+        </tr>
+  
+        <tr>
+          <td>22HST408</td>
+          <td>Universal Human Value Course</td>
+          <td>UHV</td>
+          <td>1</td>
+          <td>Prof. Kumaraswamy S</td>
+        </tr>
+  
+        <tr>
+          <td>22CDN409</td>
+          <td>Aptitude & Verbal Ability - II</td>
+          <td>HS</td>
+          <td>PP/NP</td>
+          <td>Placement Faculty</td>
+        </tr>
+        
+        <tr>
+          <td>22NSN410</td>
+          <td>National Service Scheme</td>
+          <td>MC</td>
+          <td>PP/NP</td>
+          <td>NSS Co-ordinator</td>
+        </tr>   
+  
+      </table>
+      <div class="container">
+          <h2>📅 CSBS Timetable - 4th Semester</h2>
+      <!-- Timetable Image -->
+    <img src="timetable.jpg" alt="Timetable" class="timetable-image" />
+    <li><a href="https://drive.google.com/file/d/1cKyigKcPWk9yYgtOwJb5xMxpkjETaQvN/view?usp=sharing">Click Here To Download</a></li>
+  </div>
+
+<script>
+  function toggleMenu() {
+    const navLinks = document.querySelector('.nav-links');
+    const hamburger = document.querySelector('.hamburger');
+    navLinks.classList.toggle('active');
+    hamburger.classList.toggle('active');
+  }
+
+  // Add smooth scroll behavior
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      document.querySelector(this.getAttribute('href')).scrollIntoView({
+        behavior: 'smooth'
+      });
+    });
+  });
+</script>
+
+<!-- Footer -->
+<div class="footer" id="contact">
+  <p>&copy; 2025 All rights reserved. <a href="index.html">CSBS Dept Hub</a>. Developed by <a href="https://praveenhallur123.github.io/PraveenHallur123-Praveen---personal-portfolio/">Praveen Hallur</a> | Company: <a href="https://miniprojectbytes.blogspot.com/">Mini Project Bytes</a></p>
+</div>
+
+</body>
+</html>

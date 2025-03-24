@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Join WhatsApp Groups - CSBS Dept Hub</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <style>
+        :root {
+            --primary: #00f3ff;
+            --secondary: #2a2a72;
+            --dark: #0a0a1a;
+            --light: #f0f4ff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        body {
+            background: var(--dark);
+            color: var(--light);
+            line-height: 1.6;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(10, 10, 26, 0.95);
+            padding: 1rem 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(0, 243, 255, 0.1);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, #00f3ff, #2a2a72);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+        }
+
+        nav a {
+            color: var(--light);
+            text-decoration: none;
+            margin-left: 20px;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        /* Mobile Menu */
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            flex-direction: column;
+            z-index: 1001;
+        }
+
+        .hamburger div {
+            width: 25px;
+            height: 3px;
+            background: var(--light);
+            margin: 4px 0;
+            transition: all 0.3s ease;
+        }
+
+        /* Main Section */
+        main {
+            margin-top: 100px;
+            padding: 2rem 5%;
+        }
+
+        h2 {
+            color: var(--primary);
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .group-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .group-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid rgba(0, 243, 255, 0.1);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .group-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0, 243, 255, 0.1);
+            border-color: var(--primary);
+        }
+
+        .group-card h3 {
+            font-size: 1.5rem;
+            color: var(--light);
+            margin-bottom: 0.8rem;
+        }
+
+        .group-card p {
+            font-size: 1rem;
+            color: rgba(240, 244, 255, 0.7);
+            margin-bottom: 1.2rem;
+        }
+
+        .join-btn {
+            display: inline-block;
+            padding: 0.6rem 1.5rem;
+            background-color: var(--primary);
+            color: var(--dark);
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .join-btn:hover {
+            background-color: #00c3ff;
+            box-shadow: 0 4px 12px rgba(0, 243, 255, 0.3);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 1rem;
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            color: rgba(240, 244, 255, 0.6);
+        }
+
+        @media (max-width: 768px) {
+            .group-container {
+                grid-template-columns: 1fr;
+            }
+
+            .header {
+                padding: 1rem;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            nav {
+                display: none; /* Hide the nav links by default */
+            }
+
+            .hamburger {
+                display: flex; /* Show the hamburger menu */
+            }
+
+            .hamburger.active + nav {
+                display: flex; /* Show nav links when hamburger is active */
+                flex-direction: column;
+                width: 100%;
+                background: rgba(10, 10, 26, 0.95);
+                position: absolute;
+                top: 60px;
+                left: 0;
+                z-index: 1000;
+            }
+
+            nav a {
+                margin: 10px 0; /* Adjust margin for mobile */
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="header">
+    <div class="logo">CSBS Dept Hub</div>
+    <div class="hamburger" onclick="toggleMenu()">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="notes.html">Class Notes</a>
+        <a href="timetable.html">Timetable</a>
+        <a href="events.html">Events</a>
+        <a href="faculty.html">Faculty</a>
+        <a href="wa group.html">WA Groups</a>
+        <a href="about.html">About Us</a>
+        <a href="contact.html">Contact</a>
+    </nav>
+</header>
+
+<!-- Main Content -->
+<main>
+    <h2>Join WhatsApp Groups</h2>
+    <div class="group-container">
+        <!-- Group 1 -->
+        <div class="group-card">
+            <h3>Analysis and Design of Algorithms</h3>
+            <p>Get all the latest updates and announcements related to the CSBS department.</p>
+            <a href="https://chat.whatsapp.com/FuRTpKZLsuT1bSaxvfXtbX" target="_blank" class="join-btn">
+                Join Group
+            </a>
+        </div>
+
+        <!-- Group 2 -->
+        <div class="group-card">
+            <h3>Operating System</h3>
+            <p>Access study notes and materials shared by faculty and students.</p>
+            <a href="https://chat.whatsapp.com/FMIhFNlQRcdKZtgkitmqJY" target="_blank" class="join-btn">
+                Join Group
+            </a>
+        </div>
+
+        <!-- Group 4 -->
+        <div class="group-card">
+            <h3>Business Communication & Value Science</h3>
+            <p>Access study notes and materials shared by faculty and students.</p>
+            <a href="https://chat.whatsapp.com/ISciCGsEcOrDZgcfmsmCpo" target="_blank" class="join-btn">
+                Join Group
+            </a>
+        </div>
+
+        <!-- Group 5 -->
+        <div class="group-card">
+            <h3>4th Sem CSBS 23-Batch</h3>
+            <p>Access study notes and materials And Updates shared by faculty.</p>
+            <a href="https://chat.whatsapp.com/EXAMPLE2" target="_blank" class="join-btn">
+                Join Group
+            </a>
+        </div>
+
+        <!-- Group 7 -->
+        <div class="group-card">
+            <h3>CSBS Discussions</h3>
+            <p>Connect with fellow students and discuss various topics and issues.</p>
+            <a href="https://chat.whatsapp.com/EXAMPLE3" target="_blank" class="join-btn">
+                Join Group
+            </a>
+        </div>
+
+        <!-- Group 6 -->
+        <div class="group-card">
+            <h3>STUDENT UNION CLUB 🫵</h3>
+            <p>"Joining the students' union is like diving into an ocean of power for remarkable growth.")💪 , internships, placement guidance, startup developments, career opportunities,and et.</p>
+            <a href="https://chat.whatsapp.com/CoxSQDOrI5S6ju7dEEicYJ" target="_blank " class="join-btn">
+                Join Group
+            </a>
+        </div>
+
+        <!-- Group 8 -->
+        <div class="group-card">
+            <h3>GDG On Campus Dr Ait</h3>
+            <p>Connect with fellow students and discuss various topics and issues.</p>
+            <a href="https://chat.whatsapp.com/G6PwtL2eiJtH0k1gmwwCfG" target="_blank" class="join-btn">
+                Join Group
+            </a>
+        </div>
+    </div>
+</main>
+
+<!-- Footer -->
+<div class="footer">
+    <p>&copy; 2025 All rights reserved. <a href="index.html">CSBS Dept Hub</a>. Developed by <a href="https://praveenhallur123.github.io/PraveenHallur123-Praveen---personal-portfolio/">Praveen Hallur</a> | Company: <a href="https://miniprojectbytes.blogspot.com/">Mini Project Bytes</a></p>
+</div>
+
+<script>
+    function toggleMenu() {
+        const nav = document.querySelector('nav');
+        const hamburger = document.querySelector('.hamburger');
+        nav.classList.toggle('active');
+        hamburger.classList.toggle('active');
+    }
+</script>
+
+</body>
+</html> ```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Join WhatsApp Groups - CSBS Dept Hub</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <style>
+        :root {
+            --primary: #00f3ff;
+            --secondary: #2a2a72;
+            --dark: #0a0a1a;
+            --light: #f0f4ff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        body {
+            background: var(--dark);
+            color: var(--light);
+            line-height: 1.6;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(10, 10, 26, 0.95);
+            padding: 1rem 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(0, 243, 255, 0.1);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, #00f3ff, #2a2a72);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+        }
+
+        nav a {
+            color: var(--light);
+            text-decoration: none;
+            margin-left: 20px;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        /* Mobile Menu */
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            flex-direction: column;
+            z-index: 1001;
+        }
+
+        .hamburger div {
+            width: 25px;
+            height: 3px;
+            background: var(--light);
+            margin: 4px 0;
+            transition: all 0.3s ease;
+        }
+
+        /* Main Section */
+        main {
+            margin-top: 100px;
+            padding: 2rem 5%;
+        }
+
+        h2 {
+            color: var(--primary);
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .group-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .group-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid rgba(0, 243, 255, 0.1);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .group-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0, 243, 255, 0.1);
+            border-color: var(--primary);
+        }
+
+        .group-card h3 {
+            font-size: 1.5rem;
+            color: var(--light);
+            margin-bottom: 0.8rem;
+        }
+
+        .group-card p {
+            font-size: 1rem;
+            color: rgba(240, 244, 255, 0.7);
+            margin-bottom: 1.2rem;
+        }
+
+        .join-btn {
+            display: inline-block;
+            padding: 0.6rem 1.5rem;
+            background-color: var(--primary);
+            color: var(--dark);
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .join-btn:hover {
+            background-color: #00c3ff;
+            box-shadow: 0 4px 12px rgba(0, 243, 255, 0.3);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 1rem;
+            margin-top: 2rem;
+            font -size: 0.9rem;
+            color: rgba(240, 244, 255, 0.6);
+        }
+
+        @media (max-width: 768px) {
+            .group-container {
+                grid-template-columns: 1fr;
+            }
+
+            .header {
+                padding: 1rem;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            nav {
+                display: none; /* Hide the nav links by default */
+            }
+
+            .hamburger {
+                display: flex; /* Show the hamburger menu */
+            }
+
+            .hamburger.active + nav {
+                display: flex; /* Show nav links when hamburger is active */
+                flex-direction: column;
+                width: 100%;
+                background: rgba(10, 10, 26, 0.95);
+                position: absolute;
+                top: 60px;
+                left: 0;
+                z-index: 1000;
+            }
+
+            nav a {
+                margin: 10px 0; /* Adjust margin for mobile */
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="header">
+    <div class="logo">CSBS Dept Hub</div>
+    <div class="hamburger" onclick="toggleMenu()">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="notes.html">Class Notes</a>
+        <a href="timetable.html">Timetable</a>
+        <a href="events.html">Events</a>
+        <a href="faculty.html">Faculty</a>
+        <a href="about.html">About Us</a>
+        <a href="contact.html">Contact</a>
+    </nav>
+</header>
+
+<!-- Main Content -->
+<main>
+    <h2>Join WhatsApp Groups</h2>
+    <div class="group-container">
+        <!-- Group 1 -->
+        <div class="group-card">
+            <h3>Analysis and Design of Algorithms</h3>
+            <p>Get all the latest updates and announcements related to the CSBS department.</p>
+            <a href="https://chat.whatsapp.com/FuRTpKZLsuT1bSaxvfXtbX" target="_blank" class="join-btn">
+                Join Group
+            </a>
+        </div>
+
+        <!-- Group 2 -->
+        <div class="group-card">
+            <h3>Operating System</h3>
+            <p>Access study notes and materials shared by faculty and students.</p>
+            <a href="https://chat.whatsapp.com/FMIhFNlQRcdKZtgkitmqJY" target="_blank" class="join-btn">
+                Join Group
+            </a>
+        </div>
+
+        <!-- Group 4 -->
+        <div class="group-card">
+            <h3>Business Communication & Value Science</h3>
+            <p>Access study notes and materials shared by faculty and students.</p>
+            <a href="https://chat.whatsapp.com/ISciCGsEcOrDZgcfmsmCpo" target="_blank" class="join-btn">
+                Join Group
+            </a>
+        </div>
+
+        <!-- Group 5 -->
+        <div class="group-card">
+            <h3>4th Sem CSBS 23-Batch</h3>
+            <p>Access study notes and materials And Updates shared by faculty.</p>
+            <a href="https://chat.whatsapp.com/EXAMPLE2" target="_blank" class="join-btn">
+                Join Group
+            </a>
+        </div>
+
+        <!-- Group 7 -->
+        <div class="group-card">
+            <h3>CSBS Discussions</h3>
+            <p>Connect with fellow students and discuss various topics and issues.</p>
+            <a href="https://chat.whatsapp.com/EXAMPLE3" target="_blank" class="join-btn">
+                Join Group
+            </a>
+        </div>
+
+        <!-- Group 6 -->
+        <div class="group-card">
+            <h3>STUDENT UNION CLUB 🫵</h3>
+            <p>"Joining the students' union is like diving into an ocean of power for remarkable growth.")💪 , internships, placement guidance, startup developments, career opportunities,and et.</p>
+            <a href="https://chat.whatsapp.com/CoxSQDOrI5S6ju7dEEicYJ" target="_blank" class="join-btn">
+                Join Group
+            </a>
+        </div>
+
+        <!-- Group 8 -->
+        <div class="group-card">
+            <h3>GDG On Campus Dr Ait</h3>
+ <p>Connect with fellow students and discuss various topics and issues.</p>
+            <a href="https://chat.whatsapp.com/G6PwtL2eiJtH0k1gmwwCfG" target="_blank" class="join-btn">
+                Join Group
+            </a>
+        </div>
+    </div>
+</main>
+
+<!-- Footer -->
+<div class="footer">
+    <p>&copy; 2025 All rights reserved. <a href="index.html">CSBS Dept Hub</a>. Developed by <a href="https://praveenhallur123.github.io/PraveenHallur123-Praveen---personal-portfolio/">Praveen Hallur</a> | Company: <a href="https://miniprojectbytes.blogspot.com/">Mini Project Bytes</a></p>
+</div>
+
+<script>
+    function toggleMenu() {
+        const nav = document.querySelector('nav');
+        const hamburger = document.querySelector('.hamburger');
+        nav.classList.toggle('active');
+        hamburger.classList.toggle('active');
+    }
+</script>
+
+</body>
+</html>
