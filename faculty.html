@@ -14,7 +14,7 @@
       --text-light: #f0f4ff;
       --cyber-border: 1px solid rgba(0, 243, 255, 0.3);
       --cyber-shadow: 0 0 25px rgba(0, 243, 255, 0.4);
-      --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      --transition: all 0.4s ease;
     }
 
     /* Base Reset */
@@ -33,9 +33,7 @@
       overflow-x: hidden;
     }
 
-    
-
-    /* Enhanced Navbar */
+    /* Navbar */
     .navbar {
       background: var(--glass-bg);
       backdrop-filter: blur(15px);
@@ -51,18 +49,16 @@
     }
 
     .logo {
-      font-size: 1.8rem;
+      font-size: clamp(1.5rem, 3vw, 2rem);
       background: linear-gradient(45deg, var(--neon-blue), var(--cyber-purple));
       -webkit-background-clip: text;
-      background-clip: text;
       color: transparent;
       text-shadow: 0 0 15px var(--neon-blue);
-      animation: text-glitch 2s infinite;
     }
 
     .nav-links {
       display: flex;
-      gap: 2rem;
+      gap: 1.5rem;
       list-style: none;
     }
 
@@ -70,53 +66,45 @@
       color: var(--text-light);
       text-decoration: none;
       position: relative;
-      padding: 0.5rem 0;
+      font-size: clamp(0.9rem, 2vw, 1rem);
+      padding: 0.5rem;
       transition: var(--transition);
     }
 
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      width: 0;
-      height: 2px;
-      bottom: 0;
-      left: 0;
+    .nav-links a:hover {
+      color: var(--neon-blue);
+    }
+
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      cursor: pointer;
+    }
+
+    .hamburger div {
+      width: 25px;
+      height: 3px;
       background: var(--neon-blue);
+      margin: 5px;
       transition: var(--transition);
-    }
-
-    .nav-links a:hover::after {
-      width: 100%;
     }
 
     /* Holographic Header */
     .header {
-      padding: 120px 2rem 80px;
+      padding: 150px 2rem 80px;
       text-align: center;
       position: relative;
       overflow: hidden;
     }
 
-    .header::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(45deg,
-        var(--cyber-purple),
-        var(--neon-blue)
-      );
-      opacity: 0.1;
-      z-index: -1;
-    }
-
     .header h1 {
-      font-size: clamp (2rem, 5vw, 3.5rem);
+      font-size: clamp(2rem, 5vw, 3.5rem);
       margin-bottom: 1rem;
       text-shadow: 0 0 30px var(--neon-blue);
     }
 
-    /* HOD Section */
-    .container {
+       /* HOD Section */
+       .container {
       max-width: 1200px;
       margin: 2rem auto;
       padding: 0 1rem;
@@ -167,25 +155,17 @@
     /* Faculty Grid */
     .faculty-section {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 1.5rem;
     }
 
     .faculty-card {
       background: var(--glass-bg);
-      backdrop-filter: blur(10px);
       padding: 1.5rem;
       border-radius: 15px;
       border: var(--cyber-border);
       transition: var(--transition);
       text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .faculty-card:hover {
-      transform: translateY(-10px);
-      box-shadow: var(--cyber-shadow);
     }
 
     .faculty-card img {
@@ -198,6 +178,20 @@
       box-shadow: 0 0 15px var(--neon-blue);
     }
 
+    .faculty-card:hover {
+      transform: translateY(-10px);
+      box-shadow: var(--cyber-shadow);
+    }
+
+    /* Footer */
+    .footer {
+      background: var(--glass-bg);
+      padding: 2rem;
+      text-align: center;
+      margin-top: 3rem;
+      border-top: var(--cyber-border);
+    }
+
     /* Responsive Design */
     @media (max-width: 768px) {
       .nav-links {
@@ -207,23 +201,14 @@
         flex-direction: column;
         background: var(--glass-bg);
         backdrop-filter: blur(15px);
-        width: 70%;
-        height: calc(100vh - 70px);
+        width: 60%;
         padding: 2rem;
         transition: var(--transition);
         border-left: var(--cyber-border);
-        display: flex; /* Ensure it is a flex container */
-        gap: 1rem; /* Add some gap between items */
       }
 
       .nav-links.active {
         right: 0;
-      }
-
-      .hod-section {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
       }
 
       .hamburger {
@@ -231,68 +216,17 @@
       }
     }
 
-    /* Mobile Menu */
-    .hamburger {
-      display: none;
-      cursor: pointer;
-      z-index: 1001;
-    }
-
-    .hamburger div {
-      width: 25px;
-      height: 3px;
-      background: var(--neon-blue);
-      margin: 5px;
-      transition: var(--transition);
-    }
-
-    /* Footer */
-    .footer {
-      background: var(--glass-bg);
-      backdrop-filter: blur(15px);
-      padding: 2rem;
-      text-align: center;
-      margin-top: 4rem;
-      border-top: var(--cyber-border);
-    }
-
-    /* Animations */
-    @keyframes float {
-      0% { transform: translateY(0px); }
-      50% { transform: translateY(-20px); }
-      100% { transform: translateY(0px); }
-    }
-
-    .faculty-card:hover img {
-      animation: float 3s ease-in-out infinite;
-    }
-
     @media (max-width: 480px) {
-      .faculty-card {
-        padding: 1rem;
-      }
-      
       .faculty-card img {
         width: 80px;
         height: 80px;
       }
-      
+
       .hod-section img {
-        width : 120px;
-        height: 120px;
+        width: 100px;
+        height: 100px;
       }
     }
-
-    @media (max-width: 360px) {
-      .navbar {
-        padding: 1rem;
-      }
-      
-      .logo {
-        font-size: 1.5rem;
-      }
-    }
-
   </style>
 </head>
 <body>
