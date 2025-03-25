@@ -178,6 +178,52 @@
         display: block;
       }
     }
+
+    
+    .group-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid rgba(0, 243, 255, 0.1);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .group-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0, 243, 255, 0.1);
+            border-color: var(--primary);
+        }
+
+        .group-card h3 {
+            font-size: 1.5rem;
+            color: var(--light);
+            margin-bottom: 0.8rem;
+        }
+
+        .group-card p {
+            font-size: 1rem;
+            color: rgba(240, 244, 255, 0.7);
+            margin-bottom: 1.2rem;
+        }
+
+        .join-btn {
+            display: inline-block;
+            padding: 0.6rem 1.5rem;
+            background-color: var(--primary);
+            color: var(--dark);
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .join-btn:hover {
+            background-color: #00c3ff;
+            box-shadow: 0 4px 12px rgba(0, 243, 255, 0.3);
+        }
+
   </style>
 </head>
 <body>
@@ -218,7 +264,19 @@
     📚 Some notes, lab manuals, question papers, and additional materials are not uploaded yet, but they will be available soon.  <br>
     ✨ Stay tuned for updates! 🚀 </p> <br> <hr>
 
-  <!-- Notes List -->
+  <!--Syllubs Copy-->
+
+   <div class="group-card">
+    <h2>CSBS-Scheme-Syllabus</h2>
+    <p>CSBS-Scheme-Syllabus-2023-24(3rd & 4th sem).</p>
+    <a href="https://drive.google.com/file/d/1oOes0Pe_TybaGlL3ounpkoSqXm6V3iaM/view?usp=sharing" target="_blank" class="join-btn">
+        Click Here To Download
+    </a>
+</div>
+
+
+  
+    <!-- Notes List -->
   <h2>Class Notes</h2>
   <ul id="notesList">
     <li><a href="https://drive.google.com/file/d/1bFNm9noSmT2YqKpZIkcQ67iXRhTM9Mdl/view?usp=sharing" download><span class="icon">📄</span> Analysis and Design of Algorithms Notes</a></li>
