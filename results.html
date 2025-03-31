@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Result Portal - CSBS</title>
+    <style>
+        :root {
+            --primary-color: #1a237e;
+            --secondary-color: #4CAF50;
+            --accent-color: #FFC107;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            background: #f8f9fa;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: var(--primary-color);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            border-bottom: 5px solid var(--accent-color);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .search-box {
+            background: white;
+            padding: 2rem;
+            margin: 2rem auto;
+            border-radius: 10px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        input[type="text"] {
+            padding: 12px 20px;
+            width: 300px;
+            border: 2px solid #ddd;
+            border-radius: 25px;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+
+        input[type="text"]:focus {
+            border-color: var(--primary-color);
+            outline: none;
+        }
+
+        button {
+            padding: 12px 30px;
+            background: var(--secondary-color);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s;
+            margin-left: 10px;
+        }
+
+        button:hover {
+            background: #45a049;
+            transform: translateY(-2px);
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .result-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            margin: 2rem auto;
+        }
+
+        .subject-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+        .subject-table th, .subject-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .subject-table th {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .status-pass { color: #2ecc71; font-weight: bold; }
+        .status-fail { color: #e74c3c; font-weight: bold; }
+
+        .legend {
+            background: #fff;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-top: 2rem;
+        }
+        
+    </style>
+</head>
+<header>
+    <div class="navbar">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="results.html">Results</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </div>
+    
+    <div class="header">
+        <h1>DR. AMBEDKAR INSTITUTE OF TECHNOLOGY BENGALURU 560056</h1>
+        <p>(An Autonomous Institution Affiliated to Visvesvaraya Technological University, Belagavi and Aided by Govt. of Karnataka, India)</p>
+        <h3>PROVISIONAL RESULT OF THIRD SEMESTER B.E. DEGREE (AUTONOMOUS), SEMESTER END EXAMINATION (SEE) FEBRUARY - 2025</h3>
+        <h3>COMPUTER SCIENCE AND BUSINESS SYSTEMS</h3>
+        <p>DATE: 2025-03-26</p>
+    </div>
+    
+    <style>
+    .navbar {
+        background-color: #004080;
+        padding: 10px 0;
+        text-align: center;
+    }
+    .navbar ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    }
+    .navbar ul li {
+        display: inline;
+        margin: 0 15px;
+    }
+    .navbar ul li a {
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+    }
+    .navbar ul li a:hover {
+        text-decoration: underline;
+    }
+    
+    </style>
+    
+    <div class="container">
+        <div class="search-box">
+            <p id="greetingMessage"></p> <!-- Greeting message -->
+            <input type="text" id="searchInput" placeholder="Enter USN (e.g., IDA23CB020)">
+            <button onclick="searchResult()">Check Result</button>
+        </div>
+        <div id="loading" style="display: none;">Loading...</div>
+        <div id="resultContainer"></div>
+    </div>
+    
+
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <p>Fetching results...</p>
+        </div>
+
+        <div id="resultContainer"></div>
+
+        <div class="legend">
+            <h3>Grading System</h3>
+            <p><strong>2018 Batch and Onwards:</strong> S - Outstanding (90-100); A - Excellent (80-89); B - Very Good (70-79); C - Good (60-69); D - Above Average (55-59); E - Average (40-49); F - Fail (&lt;40)</p>
+            <p><strong>2021 Batch and Onwards:</strong> O - Outstanding (90-100); A+ - Excellent (80-89); A - Very Good (70-79); B+ - Good (60-69); B - Above Average (55-59); C - Average (50-54); P - PASS (40-49); F - Fail (&lt;40)</p>
+            <p><strong>Status Codes:</strong> P - Passed; NP - Not Passed; AB - Absent; NSC - Not Satisfied CIE Marks; NSA - Not Satisfied Attendance Requirement; W - Withdrawn; NE - Not Eligible</p>
+            <p>/ I - Eligible for Make-Up Examination; WH - Withheld; DP - Dropping; PNC - Project Work Not Completed; TAL - To Be Announced Later.</p>
+        </div>
+        
+
+    <script>
+        // Subject codes and names based on the provided data
+        const subjects = [
+            { code: '22MAT301B', name: 'MATHEMATICS-III' },
+            { code: '22CBU302', name: 'DIGITAL DESIGN AND COMPUTER ORGANIZATON' },
+            { code: '22CBU303', name: 'DATABASE MANAGEMENT SYSTEMS' },
+            { code: '22CBT304 ', name: 'DATA STRUCTURES AND APPLICATIONS' },
+            { code: '22CBL305 ', name: 'DATA STRUCTURES LAB' },
+            { code: '22CBT306C', name: 'JAVA PROGRAMING' },
+            { code: '22HST307', name: 'SOCIAL CONNECT AND RESPONSIBLITY' },
+            { code: '22CBT308B', name: 'PRINCIPLES OF ECONOMICS' },
+            { code: '22CDN309', name: 'APTITUDE AND VERABLE ABLITY SKILL-I' },
+            { code: '22NSN310 ', name: 'NATIONAL SERVICE SCHEME' }
+            
+        ];
+
+        const resultData = {
+            
+    "1DA23CB001": {
+        "name": "ABHISHEK R HESARUR",
+        "grades": ["B", "B+", "A", "A", "B+", "O", "B+", "PP", "PP" , "PP"],
+        "SGPA": 7.33,
+        "CGPA": 7.61,
+        "status": "Pass"
+    },
+    "1DA23CB002": {
+        "name": "ADITYA JAGGAL",
+        "grades": ["B+", "A", "B+", "B+", "O", "A+", "PP", "PP", "PP"],
+        "SGPA": 7.67,
+        "CGPA": 8.00,
+        "status": "Pass"
+    },
+    "1DA23CB003": {
+        "name": "AISHWARYA R G",
+        "grades": ["B+", "A", "B+", "B+", "O", "A+", "PP", "PP", "PP"],
+        "SGPA": 7.67,
+        "CGPA": 8.00,
+        "status": "Pass"
+    },
+    "1DA23CB005": {
+        "name": "ASHISH NAIK",
+        "grades": ["B+", "A", "B+", "B+", "O", "P", "PP", "PP", "PP"],
+        "SGPA": 5.66,
+        "CGPA": 6.00,
+        "status": "Pass"
+    },
+    "1DA23CB006": {
+        "name": "ASHISH RANJAN",
+        "grades": ["B+", "A", "B+", "B+", "O", "P", "PP", "PP", "PP"],
+        "SGPA": 5.48,
+        "CGPA": 7.48,
+        "status": "Pass"
+    },
+    "1DA23CB007": {
+        "name": "ASRA KHAN",
+        "grades": ["B+", "A", "B+", "B+", "O", "P", "PP", "PP", "PP"],
+        "SGPA": 5.33,
+        "CGPA": 6.66,
+        "status": "Pass"
+    },
+    "1DA23CB008": {
+        "name": "ATHMIYA B J",
+        "grades": ["B+", "A", "B+", "B+", "O", "B+", "PP", "PP", "PP"],
+        "SGPA": 7.33,
+        "CGPA": 5.98,
+        "status": "Pass"
+    },
+    "1DA23CB009": {
+        "name": "AVINASH",
+        "grades": ["B+", "A", "B+", "B+", "O", "A", "PP", "PP", "PP"],
+        "SGPA": 7.33,
+        "CGPA": 5.98,
+        "status": "Pass"
+    },
+    "1DA23CB010": {
+        "name": "BHAVANI",
+        "grades": ["B+", "A", "B+", "B+", "O", "A", "PP", "PP", "PP"],
+        "SGPA": 7.33,
+        "CGPA": 5.99,
+        "status": "Pass"
+    },
+    "1DA23CB011": {
+        "name": "BHEEMI REDDY VIGNESH RED",
+        "grades": ["B+", "A", "B+", "B+", "O", "B+", "PP", "PP", "PP"],
+        "SGPA": 7.33,
+        "CGPA": 5.99,
+        "status": "Pass"
+    },
+    "1DA23CB012": {
+        "name": "BHOOMIKA N R",
+        "grades": ["B+", "A", "B+", "B+", "O", "B+", "PP", "PP", "PP"],
+        "SGPA": 7.33,
+        "CGPA": 5.99,
+        "status": "Pass"
+    },
+    "1DA23CB013": {
+        "name": "CHAITANYA P S",
+        "grades": ["B+", "A", "B+", "B+", "O", "B+", "PP", "PP", "PP"],
+        "SGPA": 7.33,
+        "CGPA": 5.99,
+        "status": "Pass"
+    },
+    "1DA23CB014": {
+        "name": "CHINMAY SHRISHAIL BHAVIKI",
+        "grades": ["B+", "A", "B+", "B+", "O", "B+", "PP", "PP", "PP"],
+        "SGPA": 7.33,
+        "CGPA": 5.99,
+        "status": "Pass"
+    },
+    "1DA23CB015": {
+        "name": "DEEPALI SOMASHEKHAR GAO",
+        "grades": ["B+", "A", "B+", "B+", "O", "B+", "PP", "PP", "PP"],
+        "SGPA": 7.33,
+        "CGPA": 5.99,
+        "status": "Pass"
+    },
+    "1DA23CB016": {
+        "name": "DHAMINI A",
+        "grades": ["B+", "A", "B+", "B+", "O", "A", "PP", "PP", "PP"],
+        "SGPA": 7.33,
+        "CGPA": 5.99,
+        "status": "Pass"
+    },
+    "1DA23CB017": {
+        "name": "DIVYANSHU DEV",
+        "grades": ["B+", "A", "B+", "B+", "O", "B+", "PP", "PP", "PP"],
+        "SGPA": 7.33,
+        "CGPA": 5.99,
+        "status": "Pass"
+    },
+    "1DA23CB018": {
+        "name": "G MANOHARA",
+        "grades": ["B+", "A", "B+", "B+", "O", "B+", "PP", "PP", "PP"],
+        "SGPA": 7.33,
+        "CGPA": 5.99,
+        "status": "Pass"
+    },
+    "1DA23CB019": {
+        "name": "GREESHMA D C",
+        "grades": ["B+", "A", "B+", "B+", "O", "A", "PP", "PP", "PP"],
+        "SGPA": 7.33,
+        "CGPA": 5.99,
+        "status": "Pass"
+    },
+
+    "1DA23CB020": {
+        "name": "KALAKESH MYAGERI",
+        "grades": ["B+", "B", "B+", "A", "O", "A", "PP", "PP", "PP"],
+        "SGPA": 7.33,
+        "CGPA": 5.99,
+        "status": "Pass"
+    },
+}
+
+        
+
+function getGreeting() {
+    const greetings = [
+        "Hello, Future Tech Leader! 🚀",
+        "May your code be bug-free, and your results be A+! 💻",
+        "Debugging... Just like checking results! Keep going! 🔍",
+        "Executing success... Your hard work will pay off! ✨",
+        "Compiling greatness... Stay confident! 🔥",
+        "Loading success... Results are just data! Stay positive! 📊",
+        "Every failure is just a syntax error. Keep learning! 📜"
+    ];
+
+    return greetings[Math.floor(Math.random() * greetings.length)];
+}
+
+// Display greeting on page load
+document.getElementById('greetingMessage').innerText = getGreeting();
+
+function searchResult() {
+    const usn = document.getElementById('searchInput').value.toUpperCase();
+    const loading = document.getElementById('loading');
+    const container = document.getElementById('resultContainer');
+
+    // Show a new greeting before checking the result
+    document.getElementById('greetingMessage').innerText = getGreeting();
+
+    // Show loading animation
+    loading.style.display = 'block';
+    container.innerHTML = '';
+
+    // Simulate API call delay
+    setTimeout(() => {
+        loading.style.display = 'none';
+        const result = resultData[usn];
+
+        if (result) {
+            let html = `
+                <div class="result-card">
+                    <h2>${result.name}</h2>
+                    <h3>USN: ${usn}</h3>
+                    <table class="subject-table">
+                        <thead>
+                            <tr>
+                                <th>Subject Code</th>
+                                <th>Subject Name</th>
+                                <th>Grade</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>`;
+
+            subjects.forEach((subject, index) => {
+                const grade = result.grades[index] || "NA"; // Handle missing grades
+                html += `
+                    <tr>
+                        <td>${subject.code}</td>
+                        <td>${subject.name}</td>
+                        <td>${grade}</td>
+                        <td class="${grade === 'F' || grade === 'NE' ? 'status-fail' : 'status-pass'}">
+                            ${grade === 'F' || grade === 'NE' ? 'Fail' : 'Pass'}
+                        </td>
+                    </tr>`;
+            });
+
+            html += `</tbody>
+                    </table>
+                    <h3>SGPA: <span class="status-pass">${result.SGPA}</span></h3>
+                    <h3>CGPA: <span class="status-pass">${result.CGPA}</span></h3>
+                    <h3 class="final-status ${result.status === 'Pass' ? 'status-pass' : 'status-fail'}">
+                        Final Result: ${result.status}
+                    </h3>
+                </div>`;
+            container.innerHTML = html;
+        } else {
+            container.innerHTML = `
+                <div class="result-card">
+                    <p class="status-fail">No result found for USN: ${usn}</p>
+                </div>`;
+        }
+    }, 1500); // Simulated network delay
+}
+
+    </script>
+</body>
+</html>
