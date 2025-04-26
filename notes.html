@@ -1,339 +1,439 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title> New Notes Portal</title>
-  <style>
-    /* General Styling */
-    body {
-      font-family: 'Poppins', sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #0a0a0a;
-      color: #f1f1f1;
-    }
-
-    /* Header */
-    header {
-      background: linear-gradient(90deg, #1e1e1e, #0f0f0f);
-      padding: 15px 30px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.5);
-    }
-
-    .logo {
-      font-size: 1.8rem;
-      font-weight: bold;
-      color: #00f0ff;
-      text-transform: uppercase;
-    }
-
-    nav ul {
-      list-style: none;
-      display: flex;
-      gap: 20px;
-      padding: 0;
-      margin: 0;
-    }
-
-    nav ul li a {
-      text-decoration: none;
-      color: #ccc;
-      font-size: 1rem;
-      font-weight: 500;
-      transition: color 0.3s ease;
-    }
-
-    nav ul li a:hover,
-    nav ul li a.active {
-      color: #00f0ff;
-    }
-
-    /* Hamburger */
-    .hamburger {
-      display: none;
-      cursor: pointer;
-    }
-
-    .hamburger div {
-      width: 25px;
-      height: 3px;
-      background-color: #ccc;
-      margin: 4px;
-      transition: 0.3s;
-    }
-
-    /* Notes Section */
-    .notes-section {
-      padding: 60px 10%;
-      background-color: #111;
-    }
-
-    .notes-section h2 {
-      font-size: 2.5rem;
-      color: #00f0ff;
-      text-align: center;
-      margin-bottom: 30px;
-    }
-
-    /* Search Bar */
-    .search-bar {
-      display: flex;
-      justify-content: center;
-      margin-bottom: 30px;
-    }
-
-    #searchNotes {
-      width: 100%;
-      max-width: 500px;
-      padding: 12px;
-      border: 1px solid #333;
-      background-color: #1a1a1a;
-      color: #ccc;
-      border-radius: 20px;
-      font-size: 1rem;
-      outline: none;
-      transition: border-color 0.3s;
-    }
-
-    #searchNotes:focus {
-      border-color: #00f0ff;
-    }
-
-    /* Notes List */
-    #notesList, #questionPapersList, #studyMaterialsList {
-      list-style: none;
-      padding: 0;
-    }
-
-    #notesList li, #questionPapersList li, #studyMaterialsList li {
-      margin-bottom: 15px;
-      background-color: #1e1e1e;
-      padding: 15px;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0, 255, 255, 0.1);
-      transition: transform 0.3s, background-color 0.3s;
-    }
-
-    #notesList li a, #questionPapersList li a, #studyMaterialsList li a {
-      text-decoration: none;
-      color: #ccc;
-      display: flex;
-      align-items: center;
-      font-size: 1.1rem;
-    }
-
-    #notesList li:hover, #questionPapersList li:hover, #studyMaterialsList li:hover {
-      background-color: #00f0ff;
-      transform: translateY(-5px);
-    }
-
-    #notesList li a:hover, #questionPapersList li a:hover, #studyMaterialsList li a:hover {
-      color: #0a0a0a;
-    }
-
-    .icon {
-      margin-right: 10px;
-      font-size: 1.5rem;
-    }
-
-    /* Footer */
-    footer {
-      background-color: #0e0e0e;
-      padding: 15px 0;
-      text-align: center;
-      color: #888;
-    }
-
-    .footer-content p {
-      margin: 0;
-      font-size: 0.9rem;
-    }
-
-    /* Responsive Design */
-    @media (max-width: 768px) {
-      nav ul {
-        display: none;
-        flex-direction: column;
-        background-color: #111;
-        padding: 20px;
-        position: absolute;
-        right: 0;
-        top: 60px;
-        width: 50%;
-        z-index: 999;
-      }
-
-      nav ul.show {
-        display: flex;
-      }
-
-      .hamburger {
-        display: block;
-      }
-    }
-
-    
-    .group-card {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 1.5rem;
-            border-radius: 12px;
-            border: 1px solid rgba(0, 243, 255, 0.1);
-            transition: all 0.3s ease;
-            text-align: center;
-        }
-
-        .group-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 20px rgba(0, 243, 255, 0.1);
-            border-color: var(--primary);
-        }
-
-        .group-card h3 {
-            font-size: 1.5rem;
-            color: var(--light);
-            margin-bottom: 0.8rem;
-        }
-
-        .group-card p {
-            font-size: 1rem;
-            color: rgba(240, 244, 255, 0.7);
-            margin-bottom: 1.2rem;
-        }
-
-        .join-btn {
-            display: inline-block;
-            padding: 0.6rem 1.5rem;
-            background-color: var(--primary);
-            color: var(--dark);
-            font-size: 1rem;
-            font-weight: 600;
-            border-radius: 8px;
-            text-decoration: none;
-            transition: background-color 0.3s ease;
-        }
-
-        .join-btn:hover {
-            background-color: #00c3ff;
-            box-shadow: 0 4px 12px rgba(0, 243, 255, 0.3);
-        }
-
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>New Notes Portal</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary: #00f0ff;
+  --secondary: #4facfe;
+  --accent: #ff00cc;
+  --bg-dark: #0a0a0a;
+  --glass: rgba(23, 32, 42, 0.7);
+  --card-bg: rgba(30, 30, 30, 0.95);
+  --footer-bg: #0e0e0e;
+  --neon-shadow: 0 0 10px #00f0ff, 0 0 20px #4facfe;
+  --transition: cubic-bezier(.4,2,.6,1);
+}
+body {
+  font-family: 'Poppins', Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(120deg, #0a0a0a 0%, #1e1e1e 100%);
+  color: #f1f1f1;
+  min-height: 100vh;
+  position: relative;
+  animation: bgMove 12s infinite alternate;
+  transition: background 0.7s var(--transition), color 0.7s var(--transition);
+}
+@keyframes bgMove {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+/* Header */
+header {
+  background: linear-gradient(90deg, #1e1e1e, #0f0f0f);
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+  animation: fadeInDown 1.2s var(--transition) both;
+}
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-40px);}
+  to { opacity: 1; transform: translateY(0);}
+}
+.logo {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--primary);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: var(--neon-shadow);
+  animation: logoPulse 2s infinite alternate;
+}
+@keyframes logoPulse {
+  from { text-shadow: 0 0 10px var(--primary);}
+  to { text-shadow: 0 0 30px var(--primary), 0 0 40px var(--secondary);}
+}
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  padding: 0;
+  margin: 0;
+  position: relative;
+  background: transparent;
+  transition: all 0.3s;
+}
+nav ul li {
+  position: relative;
+}
+nav ul li a {
+  text-decoration: none;
+  color: #ccc;
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 0.3rem 0.7rem;
+  border-radius: 8px;
+  position: relative;
+  transition: color 0.3s, background 0.3s;
+  overflow: hidden;
+}
+nav ul li a::after {
+  content: '';
+  display: block;
+  height: 2px;
+  width: 0;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  transition: width 0.4s var(--transition);
+  position: absolute;
+  left: 0; bottom: 0;
+  border-radius: 2px;
+}
+nav ul li a:hover,
+nav ul li a.active {
+  color: var(--primary);
+  background: rgba(0,240,255,0.08);
+  text-shadow: var(--neon-shadow);
+}
+nav ul li a:hover::after,
+nav ul li a.active::after {
+  width: 100%;
+}
+.hamburger {
+  display: none;
+  cursor: pointer;
+  flex-direction: column;
+  gap: 4px;
+  margin-left: 1rem;
+  z-index: 1100;
+}
+.hamburger div {
+  width: 25px;
+  height: 3px;
+  background-color: #ccc;
+  margin: 4px 0;
+  border-radius: 2px;
+  transition: 0.3s;
+}
+/* Notes Section */
+.notes-section {
+  padding: 60px 10% 40px 10%;
+  background: rgba(17,17,17,0.98);
+  min-height: 80vh;
+  animation: fadeInUp 1.3s var(--transition) both;
+}
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(40px);}
+  to { opacity: 1; transform: translateY(0);}
+}
+.notes-section h2 {
+  font-size: 2.2rem;
+  color: var(--primary);
+  text-align: center;
+  margin-bottom: 30px;
+  letter-spacing: 1px;
+  text-shadow: 0 0 12px var(--primary), 0 0 32px var(--secondary);
+  animation: fadeInUp 1.5s var(--transition) both;
+}
+.notes-section hr {
+  border: none;
+  border-top: 1px solid #222;
+  margin: 30px 0;
+}
+.search-bar {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+  animation: fadeInUp 1.7s var(--transition) both;
+}
+#searchNotes {
+  width: 100%;
+  max-width: 500px;
+  padding: 12px;
+  border: 1px solid #333;
+  background-color: #1a1a1a;
+  color: #ccc;
+  border-radius: 20px;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  box-shadow: 0 2px 12px rgba(0,240,255,0.06);
+}
+#searchNotes:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 8px var(--primary);
+  background: #181f1f;
+  color: #fff;
+}
+.group-card {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 243, 255, 0.1);
+  transition: all 0.3s var(--transition);
+  text-align: center;
+  margin: 30px auto;
+  max-width: 500px;
+  box-shadow: 0 5px 20px rgba(0, 243, 255, 0.08);
+  animation: fadeInUp 1.9s var(--transition) both;
+}
+.group-card:hover {
+  transform: translateY(-5px) scale(1.03);
+  box-shadow: 0 5px 30px rgba(0, 243, 255, 0.18), 0 0 16px var(--primary);
+  border-color: var(--primary);
+}
+.group-card h2 {
+  font-size: 1.5rem;
+  color: var(--primary);
+  margin-bottom: 0.8rem;
+  text-shadow: 0 0 8px var(--primary);
+}
+.group-card p {
+  font-size: 1rem;
+  color: rgba(240, 244, 255, 0.7);
+  margin-bottom: 1.2rem;
+}
+.join-btn {
+  display: inline-block;
+  padding: 0.6rem 1.5rem;
+  background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+  color: #0a0a0a;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background 0.3s, box-shadow 0.3s;
+  box-shadow: 0 4px 12px rgba(0, 243, 255, 0.18);
+  position: relative;
+  overflow: hidden;
+}
+.join-btn:hover {
+  background: linear-gradient(90deg, var(--secondary) 0%, var(--primary) 100%);
+  box-shadow: 0 8px 32px rgba(0,243,255,0.28), 0 0 16px var(--accent);
+  color: #fff;
+  transform: scale(1.05);
+}
+ul#notesList, ul#questionPapersList, ul#studyMaterialsList {
+  list-style: none;
+  padding: 0;
+}
+ul#notesList li, ul#questionPapersList li, ul#studyMaterialsList li {
+  margin-bottom: 15px;
+  background: var(--card-bg);
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 255, 255, 0.1);
+  transition: transform 0.3s var(--transition), background 0.3s var(--transition), box-shadow 0.3s var(--transition);
+  animation: fadeInUp 2.1s var(--transition) both;
+  border-left: 4px solid transparent;
+  position: relative;
+}
+ul#notesList li:hover, ul#questionPapersList li:hover, ul#studyMaterialsList li:hover {
+  background: linear-gradient(90deg, var(--primary) 0%, #1e1e1e 100%);
+  transform: translateY(-5px) scale(1.03);
+  box-shadow: 0 8px 32px rgba(0,240,255,0.18), 0 0 16px var(--accent);
+  border-left: 4px solid var(--primary);
+}
+ul#notesList li a, ul#questionPapersList li a, ul#studyMaterialsList li a {
+  text-decoration: none;
+  color: #ccc;
+  display: flex;
+  align-items: center;
+  font-size: 1.1rem;
+  transition: color 0.3s;
+  width: 100%;
+}
+ul#notesList li a:hover, ul#questionPapersList li a:hover, ul#studyMaterialsList li a:hover {
+  color: #0a0a0a;
+}
+.icon {
+  margin-right: 10px;
+  font-size: 1.5rem;
+  filter: drop-shadow(0 0 4px var(--primary));
+  transition: filter 0.3s;
+}
+ul#notesList li:hover .icon,
+ul#questionPapersList li:hover .icon,
+ul#studyMaterialsList li:hover .icon {
+  filter: drop-shadow(0 0 8px var(--primary));
+}
+/* Footer */
+footer {
+  background: var(--footer-bg);
+  padding: 15px 0;
+  text-align: center;
+  color: #888;
+  margin-top: 40px;
+  box-shadow: 0 -2px 24px rgba(0,240,255,0.10);
+  animation: fadeInUp 2.3s var(--transition) both;
+}
+.footer-content p {
+  margin: 0;
+  font-size: 0.95rem;
+}
+.footer-content a {
+  color: var(--primary);
+  text-decoration: underline;
+  transition: color 0.2s;
+}
+.footer-content a:hover {
+  color: #fff;
+  text-shadow: 0 0 8px var(--primary);
+}
+/* Responsive Design */
+@media (max-width: 900px) {
+  .notes-section { padding: 60px 3% 40px 3%; }
+}
+@media (max-width: 768px) {
+  nav ul {
+    display: none;
+    flex-direction: column;
+    background: #111;
+    padding: 20px;
+    position: absolute;
+    right: 0;
+    top: 60px;
+    width: 60vw;
+    z-index: 999;
+    border-radius: 0 0 10px 10px;
+    box-shadow: 0 8px 32px rgba(0,240,255,0.08);
+  }
+  nav ul.show { display: flex; }
+  .hamburger { display: flex; }
+  .notes-section { padding: 60px 2% 40px 2%; }
+}
+@media (max-width: 500px) {
+  .logo { font-size: 1.2rem; }
+  .notes-section h2 { font-size: 1.3rem; }
+  .group-card { padding: 1rem; }
+  ul#notesList li, ul#questionPapersList li, ul#studyMaterialsList li { font-size: 0.98rem; }
+}
+</style>
 </head>
 <body>
-
 <!-- Header -->
 <header>
-  <div class="logo">📘 CSBS Dept Hub</div>
-  <nav>
-    <ul>
-      <li><a href="index.html" class="nav-link neon-hover">Home</a></li>
-      <li><a href="notes.html" class="nav-link neon-hover">Class Notes</a></li>
-      <li><a href="timetable.html" class="nav-link neon-hover">Timetable</a></li>
-      <li><a href="events.html" class="nav-link neon-hover">Events</a></li>
-      <li><a href="faculty.html" class="nav-link neon-hover">Faculty</a></li>
-      <li><a href="about.html" class="nav-link neon-hover">About Us</a></li>
-      <li><a href="wa group.html" class="nav-link neon-hover">WA Groups</a></li>
-      <li><a href="https://aichatbotp.netlify.app/" class="nav-link neon-hover">Chatbot</a></li>
-      <li><a href="contact.html" class="nav-link neon-hover">Contact Us</a></li>
-    </ul>
-    <div class="hamburger">
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
-  </nav>
+<div class="logo">📘 CSBS Dept Hub</div>
+<nav>
+<ul>
+<li><a href="index.html" class="nav-link neon-hover">Home</a></li>
+<li><a href="notes.html" class="nav-link neon-hover">Class Notes</a></li>
+<li><a href="timetable.html" class="nav-link neon-hover">Timetable</a></li>
+<li><a href="events.html" class="nav-link neon-hover">Events</a></li>
+<li><a href="faculty.html" class="nav-link neon-hover">Faculty</a></li>
+<li><a href="about.html" class="nav-link neon-hover">About Us</a></li>
+<li><a href="wa group.html" class="nav-link neon-hover">WA Groups</a></li>
+<li><a href="https://aichatbotp.netlify.app/" class="nav-link neon-hover">Chatbot</a></li>
+<li><a href="contact.html" class="nav-link neon-hover">Contact Us</a></li>
+</ul>
+<div class="hamburger">
+<div></div>
+<div></div>
+<div></div>
+</div>
+</nav>
 </header>
-
 <!-- Notes Section -->
 <section class="notes-section">
-  <h2>📚 Study Notes</h2>
-
-  <!-- Search Bar -->
-  <div class="search-bar">
-    <input type="text" id="searchNotes" onkeyup="searchNotes()" placeholder="Search notes..." />
-  </div> <hr>
-
-  <h2>
-  <p>📢 Now Available: Class Notes! Some notes, lab manuals  <br>
-    📚 , question papers, and additional materials are not uploaded yet, but they will be available soon.  <br>
-    ✨ Stay tuned for updates! 🚀 </p> <br> <hr>
-
-  <!--Syllubs Copy-->
-
-   <div class="group-card">
-    <h2>CSBS-Scheme-Syllabus</h2>
-    <p>CSBS-Scheme-Syllabus-2023-24(3rd & 4th sem).</p>
-    <a href="https://drive.google.com/file/d/1oOes0Pe_TybaGlL3ounpkoSqXm6V3iaM/view?usp=sharing" target="_blank" class="join-btn">
-        Click Here To Download
-    </a>
-</div> <hr>
-
-
-  
-    <!-- Notes List -->
-  <h2>Class Notes</h2>
-  <ul id="notesList">
-    <li><a href="https://drive.google.com/drive/folders/1kPOHrTz-r1yz4cO4k8s2E91xBqoJ7ZFY?usp=drive_link" download><span class="icon">📄</span> Fundamentals of Management</a></li>
-    <li><a href="https://drive.google.com/drive/folders/1QGbMLSCV13aDXWMxXVC5D3rvse48Pbn4?usp=drive_link" download><span class="icon">📄</span> Operating Systems Notes And Lab Manual</a></li>
-    <li><a href="https://drive.google.com/drive/folders/1tFPYgKcO3LypwRPZZHWXGvORiwsLTXTO?usp=sharing" download><span class="icon">📄</span> Analysis and Design of Algorithms Notes And Lab Manual</a></li>
-    <li><a href="https://drive.google.com/drive/folders/1TgMAkURSjGwDt6SbRl7C5kCNERHiNwMs?usp=sharing" download><span class="icon">📄</span> Software Engineering Notes And Lab Manual </a></li>
-    <li><a href="https://drive.google.com/drive/folders/1BoJZBfKkamskmPUNPyLrEtWOq-Blx5FH?usp=sharing" download><span class="icon">📄</span> Marketing Research & Management Noted</a></li>
-    <li><a href="https://drive.google.com/drive/folders/1DM7DxqoS8_8c-szPhyAZgKBLPW4VK6gJ?usp=sharing" download><span class="icon">📄</span> Business Communication & Value Science Notes</a></li>
-    <li><a href="https://drive.google.com/drive/folders/1mYtd2LxOSvUc0D7VXRuQaLz00SbJgmVf?usp=sharing" download><span class="icon">📄</span> Biology for Engineers Notes</a></li>
-    <li><a href="https://drive.google.com/drive/folders/1WFJyig_jNL8b6n2dFG7sQVGaanAmVYum?usp=sharing" download><span class="icon">📄</span> Universal Human Value Course Notes</a></li>
-    </ul>
-
-  <!-- Question Papers Section -->
-  <h2>Question Papers</h2>
-  <ul id="questionPapersList">
-    <li><a href="https://drive.google.com/file/d/1QWERTY123456/view?usp=sharing" download><span class="icon">📝</span> Analysis and Design of Algorithms - Previous Year Paper</a></li>
-    <li><a href="https://drive.google.com/drive/folders/1co4L-HNVvOHucDj4u8za6LcF-KL4qaSO?usp=sharing" download><span class="icon">📝</span> Operating Systems - Previous Year Paper</a></li>
-    <li><a href="https://drive.google.com/file/d/1QWERTY123456/view?usp=sharing" download><span class="icon">📝</span> Software Engineering - Previous Year Paper</a></li>
-  </ul>
-
-  <!-- Study Materials Section -->
-  <h2>Additional Study Materials</h2>
-  <ul id="studyMaterialsList">
-    <li><a href="https://drive.google.com/file/d/1QWERTY123456/view?usp=sharing" download><span class="icon">📚</span> Data Structures Reference Guide</a></li>
-    <li><a href="https://drive.google.com/file/d/1QWERTY123456/view?usp=sharing" download><span class="icon">📚</span> Software Engineering Project Guidelines</a></li>
-  </ul>
+<h2>📚 Study Notes</h2>
+<!-- Search Bar -->
+<div class="search-bar">
+<input type="text" id="searchNotes" onkeyup="searchNotes()" placeholder="Search notes..." />
+</div>
+<hr>
+<h2>
+<p>📢 Now Available: Class Notes! Some notes, lab manuals <br>
+📚 , question papers, and additional materials are not uploaded yet, but they will be available soon. <br>
+✨ Stay tuned for updates! 🚀 </p> <br> <hr>
+<!--Syllubs Copy-->
+<div class="group-card">
+<h2>CSBS-Scheme-Syllabus</h2>
+<p>CSBS-Scheme-Syllabus-2023-24(3rd & 4th sem).</p>
+<a href="https://drive.google.com/file/d/1oOes0Pe_TybaGlL3ounpkoSqXm6V3iaM/view?usp=sharing" target="_blank" class="join-btn">
+Click Here To Download
+</a>
+</div>
+<hr>
+<!-- Notes List -->
+<h2>Class Notes</h2>
+<ul id="notesList">
+<li><a href="https://drive.google.com/drive/folders/1kPOHrTz-r1yz4cO4k8s2E91xBqoJ7ZFY?usp=drive_link" download><span class="icon">📄</span> Fundamentals of Management</a></li>
+<li><a href="https://drive.google.com/drive/folders/1QGbMLSCV13aDXWMxXVC5D3rvse48Pbn4?usp=drive_link" download><span class="icon">📄</span> Operating Systems Notes And Lab Manual</a></li>
+<li><a href="https://drive.google.com/drive/folders/1tFPYgKcO3LypwRPZZHWXGvORiwsLTXTO?usp=sharing" download><span class="icon">📄</span> Analysis and Design of Algorithms Notes And Lab Manual</a></li>
+<li><a href="https://drive.google.com/drive/folders/1TgMAkURSjGwDt6SbRl7C5kCNERHiNwMs?usp=sharing" download><span class="icon">📄</span> Software Engineering Notes And Lab Manual </a></li>
+<li><a href="https://drive.google.com/drive/folders/1BoJZBfKkamskmPUNPyLrEtWOq-Blx5FH?usp=sharing" download><span class="icon">📄</span> Marketing Research & Management Noted</a></li>
+<li><a href="https://drive.google.com/drive/folders/1DM7DxqoS8_8c-szPhyAZgKBLPW4VK6gJ?usp=sharing" download><span class="icon">📄</span> Business Communication & Value Science Notes</a></li>
+<li><a href="https://drive.google.com/drive/folders/1mYtd2LxOSvUc0D7VXRuQaLz00SbJgmVf?usp=sharing" download><span class="icon">📄</span> Biology for Engineers Notes</a></li>
+<li><a href="https://drive.google.com/drive/folders/1WFJyig_jNL8b6n2dFG7sQVGaanAmVYum?usp=sharing" download><span class="icon">📄</span> Universal Human Value Course Notes</a></li>
+</ul>
+<!-- Question Papers Section -->
+<h2>Question Papers</h2>
+<ul id="questionPapersList">
+<li><a href="https://drive.google.com/file/d/1QWERTY123456/view?usp=sharing" download><span class="icon">📝</span> Analysis and Design of Algorithms - Previous Year Paper</a></li>
+<li><a href="https://drive.google.com/drive/folders/1co4L-HNVvOHucDj4u8za6LcF-KL4qaSO?usp=sharing" download><span class="icon">📝</span> Operating Systems - Previous Year Paper</a></li>
+<li><a href="https://drive.google.com/file/d/1QWERTY123456/view?usp=sharing" download><span class="icon">📝</span> Software Engineering - Previous Year Paper</a></li>
+</ul>
+<!-- Study Materials Section -->
+<h2>Additional Study Materials</h2>
+<ul id="studyMaterialsList">
+<li><a href="https://drive.google.com/file/d/1QWERTY123456/view?usp=sharing" download><span class="icon">📚</span> Data Structures Reference Guide</a></li>
+<li><a href="https://drive.google.com/file/d/1QWERTY123456/view?usp=sharing" download><span class="icon">📚</span> Software Engineering Project Guidelines</a></li>
+</ul>
 </section>
-
 <!-- Footer -->
 <footer>
-  <div class="footer-content">
-    <p>&copy; 2025 All rights reserved. <a href="index.html">CSBS Dept Hub</a>. Developed by <a href="https://praveenhallur123.github.io/PraveenHallur123-Praveen---personal-portfolio/">Praveen Hallur</a> | Company: <a href="https://miniprojectbytes.blogspot.com/">Mini Project Bytes</a></p>
-  </div>
+<div class="footer-content">
+<p>&copy; 2025 All rights reserved. <a href="index.html">CSBS Dept Hub</a>. Developed by <a href="https://praveenhallur123.github.io/PraveenHallur123-Praveen---personal-portfolio/">Praveen Hallur</a> | Company: <a href="https://miniprojectbytes.blogspot.com/">Mini Project Bytes</a></p>
+</div>
 </footer>
-
 <!-- JavaScript -->
 <script>
-  // Hamburger Menu for Mobile View
-  const hamburger = document.querySelector(".hamburger");
-  const nav = document.querySelector("nav ul");
-
-  hamburger.addEventListener("click", () => {
-    nav.classList.toggle("show");
+// Hamburger Menu for Mobile View
+const hamburger = document.querySelector(".hamburger");
+const nav = document.querySelector("nav ul");
+hamburger.addEventListener("click", () => {
+  nav.classList.toggle("show");
+});
+// Nav active link highlight
+document.querySelectorAll('.nav-link').forEach(link => {
+  link.addEventListener('click', function() {
+    document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+    this.classList.add('active');
+    nav.classList.remove('show');
   });
-
-  // Search Notes Function
-  function searchNotes() {
-    const input = document.getElementById('searchNotes').value.toLowerCase();
-    const notes = document.querySelectorAll('#notesList li, #questionPapersList li, #studyMaterialsList li');
-
-    notes.forEach(note => {
-      const text = note.textContent.toLowerCase();
-      note.style.display = text.includes(input) ? '' : 'none';
+});
+// Search Notes Function
+function searchNotes() {
+  const input = document.getElementById('searchNotes').value.toLowerCase();
+  const notes = document.querySelectorAll('#notesList li, #questionPapersList li, #studyMaterialsList li');
+  notes.forEach(note => {
+    const text = note.textContent.toLowerCase();
+    note.style.display = text.includes(input) ? '' : 'none';
+  });
+}
+// Section/card entrance animation on scroll
+function animateOnScroll() {
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.style.animationPlayState = 'running';
+      }
     });
-  }
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.notes-section, .group-card, .content-card, footer').forEach(el => {
+    el.style.animationPlayState = 'paused';
+    observer.observe(el);
+  });
+}
+animateOnScroll();
 </script>
-
 </body>
 </html>
