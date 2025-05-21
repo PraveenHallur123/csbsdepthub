@@ -1,0 +1,215 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 Not Found | CSBS Dept Hub</title>
+  <link rel="icon" type="img-x/icon" href="https://img.icons8.com/color/48/commercial-development-management.png">
+  <style>
+    :root {
+      --neon-blue: #00f3ff;
+      --neon-pink: #ff00ff;
+      --cyber-purple: #6c00ff;
+      --dark-bg: #0a0a1a;
+      --glass-bg: rgba(16, 16, 32, 0.92);
+      --text-light: #f0f4ff;
+      --cyber-border: 1.5px solid rgba(0, 243, 255, 0.25);
+      --cyber-shadow: 0 0 32px 0 rgba(0, 243, 255, 0.18);
+      --transition: all 0.4s cubic-bezier(.4,0,.2,1);
+      --matrix-green: #00ffb8;
+    }
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      min-height: 100vh;
+      min-width: 100vw;
+      width: 100vw;
+      height: 100vh;
+      background: var(--dark-bg);
+      color: var(--text-light);
+      font-family: 'JetBrains Mono', 'Fira Mono', 'Poppins', monospace, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+    /* Animated grid background */
+    .tech-bg {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background: repeating-linear-gradient(
+        to right,
+        rgba(0,243,255,0.04) 0px,
+        rgba(0,243,255,0.04) 1px,
+        transparent 1px,
+        transparent 40px
+      ),
+      repeating-linear-gradient(
+        to bottom,
+        rgba(0,243,255,0.04) 0px,
+        rgba(0,243,255,0.04) 1px,
+        transparent 1px,
+        transparent 40px
+      );
+      animation: grid-move 10s linear infinite;
+    }
+    @keyframes grid-move {
+      0% { background-position: 0 0, 0 0; }
+      100% { background-position: 40px 40px, 40px 40px; }
+    }
+    /* Matrix code effect (optional, subtle) */
+    .matrix-fall {
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      opacity: 0.13;
+      background: repeating-linear-gradient(
+        to bottom,
+        transparent 0 10px,
+        var(--matrix-green) 10px 12px,
+        transparent 12px 22px
+      );
+      animation: matrix-move 2.5s linear infinite;
+    }
+    @keyframes matrix-move {
+      0% { background-position-y: 0; }
+      100% { background-position-y: 22px; }
+    }
+    /* Centered error card */
+    .error-container {
+      background: var(--glass-bg);
+      border-radius: 24px;
+      border: var(--cyber-border);
+      box-shadow: var(--cyber-shadow);
+      padding: 3.5rem 2.5rem 2.5rem 2.5rem;
+      text-align: center;
+      position: relative;
+      max-width: 420px;
+      width: 92vw;
+      margin: 0 auto;
+      z-index: 2;
+      animation: fadeIn 1.2s cubic-bezier(.4,0,.2,1);
+      backdrop-filter: blur(8px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(40px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+    .error-icon {
+      font-size: 3.5rem;
+      color: var(--neon-blue);
+      margin-bottom: 0.7rem;
+      filter: drop-shadow(0 0 16px var(--neon-blue));
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { filter: drop-shadow(0 0 16px var(--neon-blue)); }
+      50% { filter: drop-shadow(0 0 32px var(--neon-pink)); }
+    }
+    .error-code {
+      font-size: 5.5rem;
+      font-weight: bold;
+      background: linear-gradient(90deg, var(--neon-blue), var(--cyber-purple), var(--neon-pink));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 0 40px var(--neon-blue);
+      letter-spacing: 0.1em;
+      margin-bottom: 0.5rem;
+      animation: cyber-glitch 2.5s infinite;
+      font-family: inherit;
+    }
+    @keyframes cyber-glitch {
+      0%, 100% { text-shadow: 0 0 40px var(--neon-blue);}
+      20% { text-shadow: 2px 0 8px var(--neon-pink), -2px 0 8px var(--neon-blue);}
+      40% { text-shadow: -2px 0 8px var(--cyber-purple), 2px 0 8px var(--neon-pink);}
+      60% { text-shadow: 0 2px 8px var(--neon-blue), 0 -2px 8px var(--cyber-purple);}
+      80% { text-shadow: 2px 2px 8px var(--neon-pink), -2px -2px 8px var(--neon-blue);}
+    }
+    .error-message {
+      font-size: 1.6rem;
+      margin-bottom: 1.2rem;
+      color: var(--text-light);
+      letter-spacing: 0.03em;
+      font-family: inherit;
+    }
+    .error-desc {
+      color: #b2eaff;
+      font-size: 1.05rem;
+      margin-bottom: 2rem;
+      line-height: 1.6;
+      font-family: inherit;
+    }
+    .home-link {
+      display: inline-block;
+      padding: 1rem 2.5rem;
+      font-size: 1.1rem;
+      font-family: inherit;
+      font-weight: 600;
+      color: var(--neon-blue);
+      background: transparent;
+      border: 2px solid var(--neon-blue);
+      border-radius: 40px;
+      text-decoration: none;
+      box-shadow: 0 0 18px 0 var(--neon-blue);
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+      margin-top: 0.5rem;
+      letter-spacing: 0.08em;
+    }
+    .home-link:hover, .home-link:focus {
+      background: linear-gradient(90deg, var(--neon-blue), var(--cyber-purple));
+      color: #fff;
+      border-color: var(--cyber-purple);
+      box-shadow: 0 0 24px 0 var(--cyber-purple);
+    }
+    .ascii-art {
+      font-family: 'JetBrains Mono', 'Fira Mono', monospace;
+      color: var(--neon-blue);
+      font-size: 1.1rem;
+      margin-bottom: 1.5rem;
+      opacity: 0.7;
+      user-select: none;
+      display: none;
+    }
+    /* Responsive */
+    @media (max-width: 600px) {
+      .error-container { padding: 2rem 0.5rem; }
+      .error-code { font-size: 3.2rem; }
+      .error-message { font-size: 1.1rem; }
+      .home-link { padding: 0.8rem 1.2rem; font-size: 1rem; }
+    }
+  </style>
+  <!-- FontAwesome for icon (CDN) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
+</head>
+<body>
+  <div class="tech-bg"></div>
+  <div class="matrix-fall"></div>
+  <div class="error-container">
+    <div class="error-icon">
+      <i class="fas fa-terminal"></i>
+    </div>
+    <div class="error-code">404</div>
+    <div class="error-message">Page Not Found</div>
+    <div class="error-desc">
+      Sorry, the page you are looking for does not exist.<br>
+      It might have been moved or deleted.<br>
+      <span style="color:var(--neon-pink);">But don't worry, you can always go back home!</span>
+    </div>
+    <a href="index.html" class="home-link"><i class="fas fa-arrow-left"></i> Back to Home</a>
+  </div>
+</body>
+</html>
