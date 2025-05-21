@@ -1,4 +1,7 @@
 /* styles.css */
+/* index page*/
+
+
 :root {
     --primary-gradient: linear-gradient(135deg, #2a2a72 0%, #009ffd 100%);
     --neon-blue: #00f3ff;
@@ -126,7 +129,7 @@ body {
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    text-shadow: 0 0 30px rgba(0, 243, 255, 0.6);
+    text-shadow: 0 0 30px rgba(0, 242, 255, 0.6);
     padding: 0 1rem;
     animation: text-glitch 2s infinite;
 }
@@ -137,6 +140,31 @@ body {
     max-width: 800px;
     margin: 0 auto 3rem;
 }
+
+
+.hero {
+    /* Replace the URL below with the path to your background image */
+    background-image: url('image.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    /* Optional: Add overlay for better text visibility */
+    position: relative;
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.4); /* semi-transparent overlay */
+    z-index: 0;
+}
+
+.hero > * {
+    position: relative;
+    z-index: 1;
+}
+
 
 /* Grid Container */
 .grid-container {
@@ -179,7 +207,7 @@ body {
 
 .card:hover {
     transform: translateY(-10px);
-    box-shadow: var(--cyber-shadow);
+    box-shadow: var(c--cyber-shadow);
 }
 
 /* Footer */
@@ -426,4 +454,5 @@ body.light-mode .fa-sun { opacity: 1; }
     flex-wrap: wrap;
     justify-content: center;
 }
+
 
