@@ -1,530 +1,446 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Result Portal - CSBS</title>
-    <link rel="icon" type="img-x/icon" href="https://img.icons8.com/color/48/test-partial-passed.png">
-    <style>
-        :root {
-            --primary-color: #1a237e;
-            --secondary-color: #4CAF50;
-            --accent-color: #FFC107;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            background: #f8f9fa;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        .header {
-            background: var(--primary-color);
-            color: white;
-            padding: 2rem;
-            text-align: center;
-            border-bottom: 5px solid var(--accent-color);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-
-        .search-box {
-            background: white;
-            padding: 2rem;
-            margin: 2rem auto;
-            border-radius: 10px;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
-            text-align: center;
-        }
-
-        input[type="text"] {
-            padding: 12px 20px;
-            width: 300px;
-            border: 2px solid #ddd;
-            border-radius: 25px;
-            font-size: 16px;
-            transition: all 0.3s;
-        }
-
-        input[type="text"]:focus {
-            border-color: var(--primary-color);
-            outline: none;
-        }
-
-        button {
-            padding: 12px 30px;
-            background: var(--secondary-color);
-            color: white;
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: all 0.3s;
-            margin-left: 10px;
-        }
-
-        button:hover {
-            background: #45a049;
-            transform: translateY(-2px);
-        }
-
-        .loading {
-            display: none;
-            text-align: center;
-            margin: 2rem 0;
-        }
-
-        .spinner {
-            width: 40px;
-            height: 40px;
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid var(--primary-color);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin: 0 auto;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .result-card {
-            background: white;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
-            margin: 2rem auto;
-        }
-
-        .subject-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 1rem 0;
-        }
-
-        .subject-table th, .subject-table td {
-            padding: 12px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-
-        .subject-table th {
-            background: var(--primary-color);
-            color: white;
-        }
-
-        .status-pass { color: #2ecc71; font-weight: bold; }
-        .status-fail { color: #e74c3c; font-weight: bold; }
-
-        .legend {
-            background: #fff;
-            padding: 1.5rem;
-            border-radius: 10px;
-            margin-top: 2rem;
-        }
-
-        .normal-footer {
-    background: #2c3e50;
-    color: white;
-    text-align: center;
-    padding: 15px 0;
-    font-size: 16px; /* Normal size text */
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>New Notes Portal</title>
+<link rel="icon" type="image/x-icon" href="https://img.icons8.com/color/48/saving-book.png">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary: #00f0ff;
+  --secondary: #4facfe;
+  --accent: #ff00cc;
+  --bg-dark: #0a0a0a;
+  --glass: rgba(23, 32, 42, 0.7);
+  --card-bg: rgba(30, 30, 30, 0.95);
+  --footer-bg: #0e0e0e;
+  --neon-shadow: 0 0 10px #00f0ff, 0 0 20px #4facfe;
+  --transition: cubic-bezier(.4,2,.6,1);
 }
-
-.normal-footer p {
-    margin: 0;
-    font-weight: 500;
+body {
+  font-family: 'Poppins', Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(120deg, #0a0a0a 0%, #1e1e1e 100%);
+  color: #f1f1f1;
+  min-height: 100vh;
+  position: relative;
+  animation: bgMove 12s infinite alternate;
+  transition: background 0.7s var(--transition), color 0.7s var(--transition);
 }
-
-.normal-footer a {
-    color: #f1c40f; /* Gold color for contrast */
-    text-decoration: none;
-    font-weight: bold;
+@keyframes bgMove {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
 }
-
-.normal-footer a:hover {
-    text-decoration: underline;
+/* Header */
+header {
+  background: linear-gradient(90deg, #1e1e1e, #0f0f0f);
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+  animation: fadeInDown 1.2s var(--transition) both;
 }
-
-
-        
-    </style>
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-40px);}
+  to { opacity: 1; transform: translateY(0);}
+}
+.logo {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--primary);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: var(--neon-shadow);
+  animation: logoPulse 2s infinite alternate;
+}
+@keyframes logoPulse {
+  from { text-shadow: 0 0 10px var(--primary);}
+  to { text-shadow: 0 0 30px var(--primary), 0 0 40px var(--secondary);}
+}
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  padding: 0;
+  margin: 0;
+  position: relative;
+  background: transparent;
+  transition: all 0.3s;
+}
+nav ul li {
+  position: relative;
+}
+nav ul li a {
+  text-decoration: none;
+  color: #ccc;
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 0.3rem 0.7rem;
+  border-radius: 8px;
+  position: relative;
+  transition: color 0.3s, background 0.3s;
+  overflow: hidden;
+}
+nav ul li a::after {
+  content: '';
+  display: block;
+  height: 2px;
+  width: 0;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  transition: width 0.4s var(--transition);
+  position: absolute;
+  left: 0; bottom: 0;
+  border-radius: 2px;
+}
+nav ul li a:hover,
+nav ul li a.active {
+  color: var(--primary);
+  background: rgba(0,240,255,0.08);
+  text-shadow: var(--neon-shadow);
+}
+nav ul li a:hover::after,
+nav ul li a.active::after {
+  width: 100%;
+}
+.hamburger {
+  display: none;
+  cursor: pointer;
+  flex-direction: column;
+  gap: 4px;
+  margin-left: 1rem;
+  z-index: 1100;
+}
+.hamburger div {
+  width: 25px;
+  height: 3px;
+  background-color: #ccc;
+  margin: 4px 0;
+  border-radius: 2px;
+  transition: 0.3s;
+}
+/* Notes Section */
+.notes-section {
+  padding: 60px 10% 40px 10%;
+  background: rgba(17,17,17,0.98);
+  min-height: 80vh;
+  animation: fadeInUp 1.3s var(--transition) both;
+}
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(40px);}
+  to { opacity: 1; transform: translateY(0);}
+}
+.notes-section h2 {
+  font-size: 2.2rem;
+  color: var(--primary);
+  text-align: center;
+  margin-bottom: 30px;
+  letter-spacing: 1px;
+  text-shadow: 0 0 12px var(--primary), 0 0 32px var(--secondary);
+  animation: fadeInUp 1.5s var(--transition) both;
+}
+.notes-section hr {
+  border: none;
+  border-top: 1px solid #222;
+  margin: 30px 0;
+}
+.search-bar {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+  animation: fadeInUp 1.7s var(--transition) both;
+}
+#searchNotes {
+  width: 100%;
+  max-width: 500px;
+  padding: 12px;
+  border: 1px solid #333;
+  background-color: #1a1a1a;
+  color: #ccc;
+  border-radius: 20px;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  box-shadow: 0 2px 12px rgba(0,240,255,0.06);
+}
+#searchNotes:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 8px var(--primary);
+  background: #181f1f;
+  color: #fff;
+}
+.group-card {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 243, 255, 0.1);
+  transition: all 0.3s var(--transition);
+  text-align: center;
+  margin: 30px auto;
+  max-width: 500px;
+  box-shadow: 0 5px 20px rgba(0, 243, 255, 0.08);
+  animation: fadeInUp 1.9s var(--transition) both;
+}
+.group-card:hover {
+  transform: translateY(-5px) scale(1.03);
+  box-shadow: 0 5px 30px rgba(0, 243, 255, 0.18), 0 0 16px var(--primary);
+  border-color: var(--primary);
+}
+.group-card h2 {
+  font-size: 1.5rem;
+  color: var(--primary);
+  margin-bottom: 0.8rem;
+  text-shadow: 0 0 8px var(--primary);
+}
+.group-card p {
+  font-size: 1rem;
+  color: rgba(240, 244, 255, 0.7);
+  margin-bottom: 1.2rem;
+}
+.join-btn {
+  display: inline-block;
+  padding: 0.6rem 1.5rem;
+  background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+  color: #0a0a0a;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background 0.3s, box-shadow 0.3s;
+  box-shadow: 0 4px 12px rgba(0, 243, 255, 0.18);
+  position: relative;
+  overflow: hidden;
+}
+.join-btn:hover {
+  background: linear-gradient(90deg, var(--secondary) 0%, var(--primary) 100%);
+  box-shadow: 0 8px 32px rgba(0,243,255,0.28), 0 0 16px var(--accent);
+  color: #fff;
+  transform: scale(1.05);
+}
+ul#notesList, ul#questionPapersList, ul#studyMaterialsList {
+  list-style: none;
+  padding: 0;
+}
+ul#notesList li, ul#questionPapersList li, ul#studyMaterialsList li {
+  margin-bottom: 15px;
+  background: var(--card-bg);
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 255, 255, 0.1);
+  transition: transform 0.3s var(--transition), background 0.3s var(--transition), box-shadow 0.3s var(--transition);
+  animation: fadeInUp 2.1s var(--transition) both;
+  border-left: 4px solid transparent;
+  position: relative;
+}
+ul#notesList li:hover, ul#questionPapersList li:hover, ul#studyMaterialsList li:hover {
+  background: linear-gradient(90deg, var(--primary) 0%, #1e1e1e 100%);
+  transform: translateY(-5px) scale(1.03);
+  box-shadow: 0 8px 32px rgba(0,240,255,0.18), 0 0 16px var(--accent);
+  border-left: 4px solid var(--primary);
+}
+ul#notesList li a, ul#questionPapersList li a, ul#studyMaterialsList li a {
+  text-decoration: none;
+  color: #ccc;
+  display: flex;
+  align-items: center;
+  font-size: 1.1rem;
+  transition: color 0.3s;
+  width: 100%;
+}
+ul#notesList li a:hover, ul#questionPapersList li a:hover, ul#studyMaterialsList li a:hover {
+  color: #0a0a0a;
+}
+.icon {
+  margin-right: 10px;
+  font-size: 1.5rem;
+  filter: drop-shadow(0 0 4px var(--primary));
+  transition: filter 0.3s;
+}
+ul#notesList li:hover .icon,
+ul#questionPapersList li:hover .icon,
+ul#studyMaterialsList li:hover .icon {
+  filter: drop-shadow(0 0 8px var(--primary));
+}
+/* Footer */
+footer {
+  background: var(--footer-bg);
+  padding: 15px 0;
+  text-align: center;
+  color: #888;
+  margin-top: 40px;
+  box-shadow: 0 -2px 24px rgba(0,240,255,0.10);
+  animation: fadeInUp 2.3s var(--transition) both;
+}
+.footer-content p {
+  margin: 0;
+  font-size: 0.95rem;
+}
+.footer-content a {
+  color: var(--primary);
+  text-decoration: underline;
+  transition: color 0.2s;
+}
+.footer-content a:hover {
+  color: #fff;
+  text-shadow: 0 0 8px var(--primary);
+}
+/* Responsive Design */
+@media (max-width: 900px) {
+  .notes-section { padding: 60px 3% 40px 3%; }
+}
+@media (max-width: 768px) {
+  nav ul {
+    display: none;
+    flex-direction: column;
+    background: #111;
+    padding: 20px;
+    position: absolute;
+    right: 0;
+    top: 60px;
+    width: 60vw;
+    z-index: 999;
+    border-radius: 0 0 10px 10px;
+    box-shadow: 0 8px 32px rgba(0,240,255,0.08);
+  }
+  nav ul.show { display: flex; }
+  .hamburger { display: flex; }
+  .notes-section { padding: 60px 2% 40px 2%; }
+}
+@media (max-width: 500px) {
+  .logo { font-size: 1.2rem; }
+  .notes-section h2 { font-size: 1.3rem; }
+  .group-card { padding: 1rem; }
+  ul#notesList li, ul#questionPapersList li, ul#studyMaterialsList li { font-size: 0.98rem; }
+}
+</style>
 </head>
+<body>
+<!-- Header -->
 <header>
-    <div class="navbar">
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="results.html">Results</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="contact.html">Contact</a></li>
-        </ul>
-    </div>
-    
-    <div class="header">
-        <h1>DR. AMBEDKAR INSTITUTE OF TECHNOLOGY BENGALURU 560056</h1>
-        <p>(An Autonomous Institution Affiliated to Visvesvaraya Technological University, Belagavi and Aided by Govt. of Karnataka, India)</p>
-        <h3>PROVISIONAL RESULT OF THIRD SEMESTER B.E. DEGREE (AUTONOMOUS), SEMESTER END EXAMINATION (SEE) FEBRUARY - 2025</h3>
-        <h3>COMPUTER SCIENCE AND BUSINESS SYSTEMS</h3>
-        <p>DATE: 2025-03-26</p>
-    </div>
-    
-    <style>
-    .navbar {
-        background-color: #004080;
-        padding: 10px 0;
-        text-align: center;
-    }
-    .navbar ul {
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-    }
-    .navbar ul li {
-        display: inline;
-        margin: 0 15px;
-    }
-    .navbar ul li a {
-        color: white;
-        text-decoration: none;
-        font-weight: bold;
-    }
-    .navbar ul li a:hover {
-        text-decoration: underline;
-    }
-
-    
-    
-    </style>
-    
-    <div class="container">
-        <div class="search-box">
-            <p id="greetingMessage"></p> <!-- Greeting message -->
-            <input type="text" id="searchInput" placeholder="Enter USN (e.g., 1DA23CB020)">
-            <button onclick="searchResult()">Check Result</button>
-        </div>
-        <div id="loading" style="display: none;">Loading...</div>
-        <div id="resultContainer"></div>
-    </div>
-    
-
-        <div class="loading" id="loading">
-            <div class="spinner"></div>
-            <p>Fetching results...</p>
-        </div>
-
-        <div id="resultContainer"></div>
-
-        <div class="legend">
-            <h3>Grading System</h3>
-            <p><strong>2018 Batch and Onwards:</strong> S - Outstanding (90-100); A - Excellent (80-89); B - Very Good (70-79); C - Good (60-69); D - Above Average (55-59); E - Average (40-49); F - Fail (&lt;40)</p>
-            <p><strong>2021 Batch and Onwards:</strong> O - Outstanding (90-100); A+ - Excellent (80-89); A - Very Good (70-79); B+ - Good (60-69); B - Above Average (55-59); C - Average (50-54); P - PASS (40-49); F - Fail (&lt;40)</p>
-            <p><strong>Status Codes:</strong> P - Passed; NP - Not Passed; AB - Absent; NSC - Not Satisfied CIE Marks; NSA - Not Satisfied Attendance Requirement; W - Withdrawn; NE - Not Eligible</p>
-            <p>/ I - Eligible for Make-Up Examination; WH - Withheld; DP - Dropping; PNC - Project Work Not Completed; TAL - To Be Announced Later.</p>
-        </div>
-
-        <footer class="normal-footer">
-            <p> © 2025 All rights reserved. <a href="index.html" target="_blank"> CSBS Dept Hub </a> | | Powered by  
-                <a href="https://hallunix.netlify.app/" target="_blank">Praveen Hallur</a>
-            </p>
-        </footer>
-        
-        
-        
-        
-
-    <script>
-        // Subject codes and names based on the provided data
-        const subjects = [
-            { code: '22MAT301B', name: 'MATHEMATICS-III' },
-            { code: '22CBU302', name: 'DIGITAL DESIGN AND COMPUTER ORGANIZATON' },
-            { code: '22CBU303', name: 'DATABASE MANAGEMENT SYSTEMS' },
-            { code: '22CBT304 ', name: 'DATA STRUCTURES AND APPLICATIONS' },
-            { code: '22CBL305 ', name: 'DATA STRUCTURES LAB' },
-            { code: '22CBT306C', name: 'JAVA PROGRAMING' },
-            { code: '22HST307', name: 'SOCIAL CONNECT AND RESPONSIBLITY' },
-            { code: '22CBT308B', name: 'PRINCIPLES OF ECONOMICS' },
-            { code: '22CDN309', name: 'APTITUDE AND VERABLE ABLITY SKILL-I' },
-            { code: '22NSN310 ', name: 'NATIONAL SERVICE SCHEME' }
-            
-        ];
-
-        const resultData = {
-            
-    "1DA23CB001": {
-        "name": "ABHISHEK R HESARUR",
-        "grades": ["B", "B+", "A", "A", "B+", "O", "B+", "PP", "PP" , "PP"],
-        "SGPA": 7.33,
-        "CGPA": 7.61,
-        "status": "Pass"
-    },
-    "1DA23CB002": {
-        "name": "ADITYA JAGGAL",
-        "grades": ["B+", "A", "B+", "B+", "O", "A+", "PP", "PP", "PP"],
-        "SGPA": 7.67,
-        "CGPA": 8.00,
-        "status": "Pass"
-    },
-    "1DA23CB003": {
-        "name": "AISHWARYA R G",
-        "grades": ["B+", "A", "B+", "B+", "O", "A+", "PP", "PP", "PP"],
-        "SGPA": 7.67,
-        "CGPA": 8.00,
-        "status": "Pass"
-    },
-    "1DA23CB005": {
-        "name": "ASHISH NAIK",
-        "grades": ["B+", "A", "B+", "B+", "O", "P", "PP", "PP", "PP"],
-        "SGPA": 5.66,
-        "CGPA": 6.00,
-        "status": "Pass"
-    },
-    "1DA23CB006": {
-        "name": "ASHISH RANJAN",
-        "grades": ["B+", "A", "B+", "B+", "O", "P", "PP", "PP", "PP"],
-        "SGPA": 5.48,
-        "CGPA": 7.48,
-        "status": "Pass"
-    },
-    "1DA23CB007": {
-        "name": "ASRA KHAN",
-        "grades": ["B+", "A", "B+", "B+", "O", "P", "PP", "PP", "PP"],
-        "SGPA": 5.33,
-        "CGPA": 6.66,
-        "status": "Pass"
-    },
-    "1DA23CB008": {
-        "name": "ATHMIYA B J",
-        "grades": ["B+", "A", "B+", "B+", "O", "B+", "PP", "PP", "PP"],
-        "SGPA": 7.33,
-        "CGPA": 5.98,
-        "status": "Pass"
-    },
-    "1DA23CB009": {
-        "name": "AVINASH",
-        "grades": ["B+", "A", "B+", "B+", "O", "A", "PP", "PP", "PP"],
-        "SGPA": 7.33,
-        "CGPA": 5.98,
-        "status": "Pass"
-    },
-    "1DA23CB010": {
-        "name": "BHAVANI",
-        "grades": ["B+", "A", "B+", "B+", "O", "A", "PP", "PP", "PP"],
-        "SGPA": 7.33,
-        "CGPA": 5.99,
-        "status": "Pass"
-    },
-    "1DA23CB011": {
-        "name": "BHEEMI REDDY VIGNESH RED",
-        "grades": ["B+", "A", "B+", "B+", "O", "B+", "PP", "PP", "PP"],
-        "SGPA": 7.33,
-        "CGPA": 5.99,
-        "status": "Pass"
-    },
-    "1DA23CB012": {
-        "name": "BHOOMIKA N R",
-        "grades": ["B+", "A", "B+", "B+", "O", "B+", "PP", "PP", "PP"],
-        "SGPA": 7.33,
-        "CGPA": 5.99,
-        "status": "Pass"
-    },
-    "1DA23CB013": {
-        "name": "CHAITANYA P S",
-        "grades": ["B+", "A", "B+", "B+", "O", "B+", "PP", "PP", "PP"],
-        "SGPA": 7.33,
-        "CGPA": 5.99,
-        "status": "Pass"
-    },
-    "1DA23CB014": {
-        "name": "CHINMAY SHRISHAIL BHAVIKI",
-        "grades": ["B+", "A", "B+", "B+", "O", "B+", "PP", "PP", "PP"],
-        "SGPA": 7.33,
-        "CGPA": 5.99,
-        "status": "Pass"
-    },
-    "1DA23CB015": {
-        "name": "DEEPALI SOMASHEKHAR GAO",
-        "grades": ["B+", "A", "B+", "B+", "O", "B+", "PP", "PP", "PP"],
-        "SGPA": 7.33,
-        "CGPA": 5.99,
-        "status": "Pass"
-    },
-    "1DA23CB016": {
-        "name": "DHAMINI A",
-        "grades": ["B+", "A", "B+", "B+", "O", "A", "PP", "PP", "PP"],
-        "SGPA": 7.33,
-        "CGPA": 5.99,
-        "status": "Pass"
-    },
-    "1DA23CB017": {
-        "name": "DIVYANSHU DEV",
-        "grades": ["B+", "A", "B+", "B+", "O", "B+", "PP", "PP", "PP"],
-        "SGPA": 7.33,
-        "CGPA": 5.99,
-        "status": "Pass"
-    },
-    "1DA23CB018": {
-        "name": "G MANOHARA",
-        "grades": ["B+", "A", "B+", "B+", "O", "B+", "PP", "PP", "PP"],
-        "SGPA": 7.33,
-        "CGPA": 5.99,
-        "status": "Pass"
-    },
-    "1DA23CB019": {
-        "name": "GREESHMA D C",
-        "grades": ["B+", "A", "B+", "B+", "O", "A", "PP", "PP", "PP"],
-        "SGPA": 7.33,
-        "CGPA": 5.99,
-        "status": "Pass"
-    },
-
-    "1DA23CB020": {
-        "name": "KALAKESH MYAGERI",
-        "grades": ["B+", "B", "B+", "A", "O", "A", "PP", "PP", "PP" , "PP"],
-        "SGPA": 7.33,
-        "CGPA": 5.99,
-        "status": "Pass"
-    },
-
-    "1DA23CB021": {
-        "name": "KANTAMANENI HARSHITH",
-        "grades": ["NE", "F", "F", "F", "F", "F", "PP", "PP", "PP" , "PP"],
-        "SGPA": 0.81,
-        "CGPA": 5.61,
-        "status": "Fail"
-    },
-
-    "1DA23CB022": {
-        "name": "KEERTHANA C VENKATESH",
-        "grades": ["P", "B+", "B+", "B+", "A", "B+", "0", "PP", "PP" , "PP" , "PP"],
-        "SGPA": 6.62,
-        "CGPA": 7.07,
-        "status": "Pass"
-    },
-
-    "1DA23CB023": {
-        "name": "KUSHAL A",
-        "grades": ["B+", "A+", "A", "B+", "A+", "O", "A", "PP", "PP" , "PP" , "PP"],
-        "SGPA": 8.14,
-        "CGPA": 7.93,
-        "status": "Pass"
-    },
-
-    "1DA23CB024": {
-        "name": "MADDALA TABITHA ANGEL",
-        "grades": ["B+", "A+", "A+", "A+", "A", "A+", "0", "PP", "PP" , "PP" , "PP"],
-        "SGPA": 8.57,
-        "CGPA": 8.72,
-        "status": "Pass"
-    },
-
-    "1DA23CB025": {
-        "name": "MANOJ KUMAR N",
-        "grades": ["NE", "F", "C", "NE", "C", "P", "0", "PP", "PP" , "PP" , "PP"],
-        "SGPA": 1.53,
-        "CGPA": 5.10,
-        "status": "Fail"
-    },
-
-    "1DA23CB026": {
-        "name": "MOHAMED AFNAAN AYUB",
-        "grades": ["P", "B+", "A", "A", "A+", "B+", "0", "B+", "PP" , "PP" , "PP"],
-        "SGPA": 7.00,
-        "CGPA": 6.92,
-        "status": "Pass"
-    },
+<div class="logo">📘 CSBS Dept Hub</div>
+<nav>
+<ul>
+<li><a href="index.html" class="nav-link neon-hover">Home</a></li>
+<li><a href="notes.html" class="nav-link neon-hover">Class Notes</a></li>
+<li><a href="timetable.html" class="nav-link neon-hover">Timetable</a></li>
+<li><a href="events.html" class="nav-link neon-hover">Events</a></li>
+<li><a href="faculty.html" class="nav-link neon-hover">Faculty</a></li>
+<li><a href="about.html" class="nav-link neon-hover">About Us</a></li>
+<li><a href="wa group.html" class="nav-link neon-hover">WA Groups</a></li>
+<li><a href="https://aichatbotp.netlify.app/" class="nav-link neon-hover">Chatbot</a></li>
+<li><a href="contact.html" class="nav-link neon-hover">Contact Us</a></li>
+</ul>
+<div class="hamburger">
+<div></div>
+<div></div>
+<div></div>
+</div>
+</nav>
+</header>
+<!-- Notes Section -->
+<section class="notes-section">
+<h2>📚 Study Notes</h2>
+<!-- Search Bar -->
+<div class="search-bar">
+<input type="text" id="searchNotes" onkeyup="searchNotes()" placeholder="Search notes..." />
+</div>
+<hr>
+<h2>
+<p>📢 Now Available: Class Notes! Some notes, lab manuals <br>
+📚 , question papers, and additional materials are not uploaded yet, but they will be available soon. <br>
+✨ Stay tuned for updates! 🚀 </p> <br> <hr>
+<!--Syllubs Copy-->
+<div class="group-card">
+<h2>CSBS-Scheme-Syllabus</h2>
+<p>CSBS-Scheme-Syllabus-2023-24(3rd & 4th sem).</p>
+<a href="https://drive.google.com/file/d/1oOes0Pe_TybaGlL3ounpkoSqXm6V3iaM/view?usp=sharing" target="_blank" class="join-btn">
+Click Here To Download
+</a>
+</div>
+<hr>
+<!-- Notes List -->
+<h2>Class Notes</h2>
+<ul id="notesList">
+<li><a href="https://drive.google.com/drive/folders/1kPOHrTz-r1yz4cO4k8s2E91xBqoJ7ZFY?usp=drive_link" download><span class="icon">📄</span> Fundamentals of Management</a></li>
+<li><a href="https://drive.google.com/drive/folders/1QGbMLSCV13aDXWMxXVC5D3rvse48Pbn4?usp=drive_link" download><span class="icon">📄</span> Operating Systems Notes And Lab Manual</a></li>
+<li><a href="https://drive.google.com/drive/folders/1tFPYgKcO3LypwRPZZHWXGvORiwsLTXTO?usp=sharing" download><span class="icon">📄</span> Analysis and Design of Algorithms Notes And Lab Manual</a></li>
+<li><a href="https://drive.google.com/drive/folders/1TgMAkURSjGwDt6SbRl7C5kCNERHiNwMs?usp=sharing" download><span class="icon">📄</span> Software Engineering Notes And Lab Manual </a></li>
+<li><a href="https://drive.google.com/drive/folders/1BoJZBfKkamskmPUNPyLrEtWOq-Blx5FH?usp=sharing" download><span class="icon">📄</span> Marketing Research & Management Noted</a></li>
+<li><a href="https://drive.google.com/drive/folders/1DM7DxqoS8_8c-szPhyAZgKBLPW4VK6gJ?usp=sharing" download><span class="icon">📄</span> Business Communication & Value Science Notes</a></li>
+<li><a href="https://drive.google.com/drive/folders/1tQyLJSRKgTccOZMRvfRunaAiiBmWMGi0?usp=drive_link" download><span class="icon">📄</span> Biology for Engineers Notes</a></li>
+<li><a href="https://drive.google.com/drive/folders/1WFJyig_jNL8b6n2dFG7sQVGaanAmVYum?usp=sharing" download><span class="icon">📄</span> Universal Human Value Course Notes</a></li>
+</ul>
+<!-- Question Papers Section -->
+<h2>Question Papers</h2>
+<ul id="questionPapersList">
+<li><a href="https://drive.google.com/file/d/1QWERTY123456/view?usp=sharing" download><span class="icon">📝</span> Analysis and Design of Algorithms - Previous Year Paper</a></li>
+<li><a href="https://drive.google.com/drive/folders/1co4L-HNVvOHucDj4u8za6LcF-KL4qaSO?usp=sharing" download><span class="icon">📝</span> Operating Systems - Previous Year Paper</a></li>
+<li><a href="https://drive.google.com/file/d/1QWERTY123456/view?usp=sharing" download><span class="icon">📝</span> Software Engineering - Previous Year Paper</a></li>
+<li><a href="https://drive.google.com/drive/folders/17zA_5DwU9_-G6upcby5o690CmQ5Y5RcI?usp=sharing" download><span class="icon">📝</span> Biology for Engineers - Previous Year Paper</a></li>
+<li><a href="https://drive.google.com/drive/folders/1hZAIkZTU5NK3l8Qet99d9XbfJAMbM1GI?usp=drive_link" download><span class="icon">📝</span> Universal Human Value - Previous Year Paper</a></li>
 
 
+</ul>
+<!-- Study Materials Section -->
+<h2>Additional Study Materials</h2>
+<ul id="studyMaterialsList">
+<li><a href="https://drive.google.com/file/d/1QWERTY123456/view?usp=sharing" download><span class="icon">📚</span> Data Structures Reference Guide</a></li>
+<li><a href="https://drive.google.com/file/d/1QWERTY123456/view?usp=sharing" download><span class="icon">📚</span> Software Engineering Project Guidelines</a></li>
+<li><a href="https://drive.google.com/drive/folders/1NC5wLHUMUye5_5zHzSgTgXDUdVmh43ZU" download><span class="icon">📚</span> All companies placement material in single drive 👇</a></li>
+<li><a href="https://drive.google.com/drive/folders/1lpY0y-msEeFcbbjlgQBe65KNCKV93kQE" download><span class="icon">📚</span>Full Stack Web development all Resources (HTML , CSS , JAVASCRIPT, REACT, NODE JS, MONGO DB ) all Handwritten notes are here for free✨</a></li>
+</ul>
+</section>
+<!-- Footer -->
+<footer>
+<div class="footer-content">
+<p>&copy; 2025 All rights reserved. <a href="index.html">CSBS Dept Hub</a>. Powered by <a href="https://hallunix.netlify.app/">Hallunix Tech Solutions</a> 
+</div>
+</footer>
+<!-- JavaScript -->
+<script>
+// Hamburger Menu for Mobile View
+const hamburger = document.querySelector(".hamburger");
+const nav = document.querySelector("nav ul");
+hamburger.addEventListener("click", () => {
+  nav.classList.toggle("show");
+});
+// Nav active link highlight
+document.querySelectorAll('.nav-link').forEach(link => {
+  link.addEventListener('click', function() {
+    document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+    this.classList.add('active');
+    nav.classList.remove('show');
+  });
+});
+// Search Notes Function
+function searchNotes() {
+  const input = document.getElementById('searchNotes').value.toLowerCase();
+  const notes = document.querySelectorAll('#notesList li, #questionPapersList li, #studyMaterialsList li');
+  notes.forEach(note => {
+    const text = note.textContent.toLowerCase();
+    note.style.display = text.includes(input) ? '' : 'none';
+  });
 }
-
-        
-
-function getGreeting() {
-    const greetings = [
-        "Hello, Future Tech Leader! 🚀",
-        "May your code be bug-free, and your results be A+! 💻",
-        "Debugging... Just like checking results! Keep going! 🔍",
-        "Executing success... Your hard work will pay off! ✨",
-        "Compiling greatness... Stay confident! 🔥",
-        "Loading success... Results are just data! Stay positive! 📊",
-        "Every failure is just a syntax error. Keep learning! 📜"
-    ];
-
-    return greetings[Math.floor(Math.random() * greetings.length)];
+// Section/card entrance animation on scroll
+function animateOnScroll() {
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.style.animationPlayState = 'running';
+      }
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.notes-section, .group-card, .content-card, footer').forEach(el => {
+    el.style.animationPlayState = 'paused';
+    observer.observe(el);
+  });
 }
-
-// Display greeting on page load
-document.getElementById('greetingMessage').innerText = getGreeting();
-
-function searchResult() {
-    const usn = document.getElementById('searchInput').value.toUpperCase();
-    const loading = document.getElementById('loading');
-    const container = document.getElementById('resultContainer');
-
-    // Show a new greeting before checking the result
-    document.getElementById('greetingMessage').innerText = getGreeting();
-
-    // Show loading animation
-    loading.style.display = 'block';
-    container.innerHTML = '';
-
-    // Simulate API call delay
-    setTimeout(() => {
-        loading.style.display = 'none';
-        const result = resultData[usn];
-
-        if (result) {
-            let html = `
-                <div class="result-card">
-                    <h2>${result.name}</h2>
-                    <h3>USN: ${usn}</h3>
-                    <table class="subject-table">
-                        <thead>
-                            <tr>
-                                <th>Subject Code</th>
-                                <th>Subject Name</th>
-                                <th>Grade</th>
-                                <th>Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>`;
-
-            subjects.forEach((subject, index) => {
-                const grade = result.grades[index] || "NA"; // Handle missing grades
-                html += `
-                    <tr>
-                        <td>${subject.code}</td>
-                        <td>${subject.name}</td>
-                        <td>${grade}</td>
-                        <td class="${grade === 'F' || grade === 'NE' ? 'status-fail' : 'status-pass'}">
-                            ${grade === 'F' || grade === 'NE' ? 'Fail' : 'Pass'}
-                        </td>
-                    </tr>`;
-            });
-
-            html += `</tbody>
-                    </table>
-                    <h3>SGPA: <span class="status-pass">${result.SGPA}</span></h3>
-                    <h3>CGPA: <span class="status-pass">${result.CGPA}</span></h3>
-                    <h3 class="final-status ${result.status === 'Pass' ? 'status-pass' : 'status-fail'}">
-                        Final Result: ${result.status}
-                    </h3>
-                </div>`;
-            container.innerHTML = html;
-        } else {
-            container.innerHTML = `
-                <div class="result-card">
-                    <p class="status-fail">No result found for USN: ${usn}</p>
-                </div>`;
-        }
-    }, 1500); // Simulated network delay
-}
-
-    </script>
+animateOnScroll();
+</script>
 </body>
 </html>
