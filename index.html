@@ -1,91 +1,188 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Redirecting...</title>
-  <link rel="icon" type="image/x-icon" href="https://i.ibb.co/xq4VDkKy/hallunix-ai.jpg">
-  <style>
-    @import url('https://fonts.googleapis.com/css?family=Raleway:100');
-
-    body {
-      background: #222;
-      margin: 40px 50px;
-      color: #4a8df8;
-      font-family: 'Raleway', cursive;
-      font-weight: 100;
-      text-align: center;
-    }
-
-    h1 {
-      font-size: 3em;
-      margin-bottom: 50px;
-    }
-
-    .slider {
-      position: relative;
-      width: 400px;
-      height: 2px;
-      margin: 0 auto 50px auto;
-    }
-
-    .line {
-      position: absolute;
-      width: 100%;
-      height: 2px;
-      background: #4a8df8;
-      animation: slide 2s infinite;
-    }
-
-    .break {
-      position: absolute;
-      top: -4px;
-      width: 10px;
-      height: 10px;
-      background: #4a8df8;
-      border-radius: 50%;
-    }
-
-    .dot1 { left: 20%; animation: bounce 1.5s infinite ease-in-out; }
-    .dot2 { left: 45%; animation: bounce 1.5s infinite ease-in-out 0.2s; }
-    .dot3 { left: 70%; animation: bounce 1.5s infinite ease-in-out 0.4s; }
-
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
-    }
-
-    @keyframes slide {
-      0% { transform: scaleX(0); }
-      50% { transform: scaleX(1); }
-      100% { transform: scaleX(0); }
-    }
-
-    p {
-      font-size: 1em;
-    }
-
-    a {
-      color: #4a8df8;
-      text-decoration: underline;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSBS - Dr. Ambedkar Institute of Technology</title>
+    <link rel="icon" type="image/x-icon" href="DALL·E 2025-03-24 03.08.52 - Create a modern and professional logo for the CSBS (Computer Science and Business Systems) department at Dr. Ambedkar Institute of Technology. The log.webp">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="page-loader.html">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-  <h1>Just a moment...</h1>
-  <div class="slider">
-    <div class="line"></div>
-    <div class="break dot1"></div>
-    <div class="break dot2"></div>
-    <div class="break dot3"></div>
-  </div>
-  <p>We're redirecting you to our new site... Not working? <a href="https://csbs.netlify.app/">Click here.</a></p>
+    <!-- Navigation -->
+    <nav class="glass-nav">
+        <div class="logo">
+            <img src="DALL·E 2025-03-24 03.08.52 - Create a modern and professional logo for the CSBS (Computer Science and Business Systems) department at Dr. Ambedkar Institute of Technology. The log.webp" alt="CSBS Logo" class="logo-img">
+            <span class="logo-text">CSBS Dept Hub</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html" class="nav-link neon-hover">Home</a></li>
+            <li><a href="notes.html" class="nav-link neon-hover">Class Notes</a></li>
+            <li><a href="timetable.html" class="nav-link neon-hover">Timetable</a></li>
+            <li><a href="events.html" class="nav-link neon-hover">Events</a></li>
+            <li><a href="faculty.html" class="nav-link neon-hover">Faculty</a></li>
+            <li><a href="wa group.html" class="nav-link neon-hover">WA Groups</a></li>
+            <li><a href="about.html" class="nav-link neon-hover">About Us</a></li>
+            <li><a href="contact.html" class="nav-link neon-hover">Contact Us</a></li>
+        </ul>
+        <div class="nav-controls">
+            <div class="mode-toggle" id="modeToggle">
+                <i class="fas fa-moon"></i>
+                <i class="fas fa-sun"></i>
+            </div>
+            <div class="hamburger" id="hamburger">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+        </div>
+    </nav>
 
-  <script>
-    // Redirect after 5 seconds
-    setTimeout(function () {
-      window.location.href = "https://csbs4.netlify.app/";
-    }, 5000);
-  </script>
+    <!-- Hero Section -->
+<section class="hero">
+    <div class="cyber-glitch-container">
+        <!-- College Logo -->
+<img src="https://i.ibb.co/mrZDxY9B/Whats-App-Image-2025-06-18-at-4-11-16-PM.jpg" alt="Whats-App-Image-2025-06-18-at-4-11-16-PM" border="0"></a>
+        <!-- Glitch Heading -->
+        <h1 class="cyber-text" data-text="COMPUTER SCIENCE & BUSINESS SYSTEMS">
+           Department of Computer Science and Business Systems
+        </h1>
+        <div class="matrix-fall"></div>
+    </div>
+
+    <!-- Subheading -->
+    <!-- <p class="subheading">Dr. Ambedkar Institute of Technology</p> -->
+
+    <!-- CTA Buttons -->
+    <div class="cta-buttons">
+        <button class="neon-button" onclick="location.href='notes.html'">Access Notes</button>
+        <button class="neon-button" onclick="location.href='timetable.html'">View Timetable</button>
+    </div>
+</section>
+
+
+    <!-- Featured Content Section -->
+     
+    <section class="featured-content">
+        <div class="content-card">
+            <h1><i class="fas fa-bullhorn"></i> Announcements</h1>
+            <div class="announcement-list">
+
+
+            </div>
+            <div class="announcement">
+                <p class="date">2025-03-28</p>
+                <p class="title">📢 ANNOUNCEMENT: THIRD SEMESTER RESULTS DECLARED! 📢 <br>
+        
+                    The Provisional Results for the Third Semester B.E. Degree (Autonomous) Semester End Examination (SEE) - February 2025 have been announced for Computer Science and Business Systems (CSBS) students. <br>
+                   <a href="results.html">Click Here To Check Your Result </a>
+        </div>
+
+                <div class="announcement">
+                    <p class="date">2023-10-20</p>
+                    <p class="title">🚀 COLOSSUS 2.0 – National Level 24-Hour Hackathon <br>
+
+                        Get ready to push your limits, collaborate, and innovate at COLOSSUS 2.0, a 24-hour national-level hackathon organized by Dr. Ambedkar Institute of Technology. <br>
+                        
+                        🔥 Hackathon Details:
+                        📅 Date: April 11th & 12th, 2025
+                        📍 Venue: Dr. Ambedkar Institute of Technology, Outer Ring, Malathahalli, Bengaluru, Karnataka</p> <br>
+
+                        <a href="events.html">Click Here To  More Information </a>
+                </div>
+                <div class="announcement">
+                    <p class="date">2025-03-05</p>
+                    <p class="title">Hey everyone!🎬✨  <br>
+
+                        The 10X Club is looking for energetic and creative volunteers to help us create engaging reels, promote activities, and brainstorm viral content! If you love being in front of or behind the camera, this is your chance to boost your portfolio, gain hands-on marketing experience, and have fun while making a difference!</p> 
+
+                       <a href="events.html">Click Here To More Information </a>
+        </div>
+
+
+
+            </div>
+        </div>
+
+        <div class="content-card">
+            <h1><i class="fas fa-chart-line"></i> Academic Updates</h1>
+            <div class="update-list">
+                <div class="update">
+                    <p class="date">05-05-2025</p>
+                    <p class="title">Test - 1</p>
+                    <a href="https://drive.google.com/file/d/1kCv0tf10mhw8XFW5uB9iFgczCHRyVl0Z/view?usp=drive_link">Time Table</a>
+                </div>
+                <div class="update">
+                    <p class="date">26-05-2025</p>
+                    <p class="title">Skill Lab</p>
+                </div>
+                <div class="update">
+                  <p class="date">16-06-2025</p>
+                  <p class="title">Test -2</p>
+                  <a href="https://drive.google.com/file/d/1kUFh5cstUr-amJ1jQpFus7cAFtlXfQ-e/view?usp=sharing">Time Table</a> <br>
+                  <a href="https://drive.google.com/file/d/1VGJfuagAuxzGfdM4eBuecTToh1SCZ6Ee/view?usp=drive_link">Seat Arrangement</a>
+                  </div>
+
+                  <div class="update">
+                    <p class="date">16-06-2025</p>
+                    <p class="title">Lab Test</p>
+                    </div>
+
+                    <a href="https://drive.google.com/file/d/1GG8-2jiRaWsjqNXLkhsgwAyKePZQocJP/view?usp=sharing"> Click here to download Academic Calendar </a>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="cyber-footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="notes.html">Study Material</a></li>
+                    <li><a href="https://drive.google.com/file/d/1GG8-2jiRaWsjqNXLkhsgwAyKePZQocJP/view?usp=sharing">Academic Calendar</a></li>
+                    <li><a href="events.html">College Events</a></li>
+                    <li><a href="results.html">Results</a></li>
+                    <li><a href="timetable.html">Timetable</a></li>
+                    <li><a href="faculty.html">Faculty</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="wa group.html">Join WhatsApp Groups</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="https://aichatbotp.netlify.app/">Chatbot For Your Study</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Contact</h4>
+                
+                <p> 📢 🔔 Stay Updated & Connected! 🔔 <br>
+
+                    💬 Got any study materials, notes, or updates to share? Or need the latest info about this site? Reach out to me anytime! 🚀 <br>
+                    
+                    👉 Your support fuels the growth — Let’s make learning unstoppable! 💡🔥 <br>
+                    🌐 Together, We Learn. Together, We Rise. 🌟 </p> <br>
+
+                <p>praveenhallur2003@gmail.com</p>
+                <p>+91 9632912346</p>
+            </div>
+            <div class="footer-bottom" style="text-align:center; margin-top:3rem; padding-top:2rem; font-size:0.9rem; color:#aaa; border-top:1px solid rgba(0, 243, 255, 0.1);">
+                <p style="margin: 0;">
+                  &copy; 2025 All rights reserved. 
+                  <a href="index.html" style="color:#00f3ff; text-decoration:none; position:relative;">
+                    CSBS Dept Hub
+                  </a>. Powered  by 
+                  <a href="https://hallunix.netlify.app/" style="color:#00f3ff; text-decoration:none; position:relative;">
+                    Hallunix Tech Solutions
+                  </a> 
+                  </a>
+                </p>
+              </div>
+              
+
+    <script src="script.js"></script>
+
+    
 </body>
 </html>
